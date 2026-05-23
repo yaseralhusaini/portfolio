@@ -118,12 +118,12 @@ elif page == "Interactive Simulation Dashboard":
         "Simulated Job Placements": monthly_placements
     })
     
-    # Plotly Chart Generation
+  # Plotly Chart Generation
     fig = px.bar(
         df_chart, 
         x="Month", 
         y=["Target Enrolled", "Simulated Job Placements"],
-        bgroupmode="group",
+        barmode="group",  # <-- FIXED HERE
         title="Simulated Operational Performance Tracking over 12 Months",
         labels={"value": "Count of Participants", "variable": "Metric"},
         color_discrete_sequence=["#1f77b4", "#ff7f0e"]
