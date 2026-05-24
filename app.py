@@ -26,6 +26,7 @@ def get_file_b64(filename):
 resume_b64 = get_file_b64("resume.pdf")
 photo_b64  = get_file_b64("photo_nobg.png")
 report_b64 = get_file_b64("takafu_report.pdf")
+brief_b64  = get_file_b64("early_retirement_brief.pdf")
 
 # ── Page routing via session state (avoids Streamlit Cloud routing issues) ──
 if 'page' not in st.session_state:
@@ -33,8 +34,8 @@ if 'page' not in st.session_state:
 
 # Allow HTML links like <a href="?page=takafu"> to trigger navigation
 _qp = st.query_params
-if _qp.get("page") == "takafu":
-    st.session_state.page = 'takafu'
+if _qp.get("page") in ("takafu", "georgetown"):
+    st.session_state.page = _qp.get("page")
     st.query_params.clear()
     st.rerun()
 
@@ -882,6 +883,113 @@ if st.session_state.page == 'takafu':
 </footer>""", unsafe_allow_html=True)
     st.stop()
 
+# ── Georgetown / Early Retirement case study ───────────────────────────────────
+if st.session_state.page == 'georgetown':
+    components.html("""<script>
+        function scrollUp() {
+            var targets = [
+                window.parent.document.querySelector('[data-testid="stAppViewContainer"]'),
+                window.parent.document.querySelector('[data-testid="stMain"]'),
+                window.parent.document.querySelector('.main'),
+                window.parent.document.documentElement,
+                window.parent.document.body
+            ];
+            targets.forEach(function(el) { if (el) { el.scrollTop = 0; } });
+            window.parent.scrollTo(0, 0);
+        }
+        scrollUp();
+        setTimeout(scrollUp, 150);
+        setTimeout(scrollUp, 500);
+    </script>""", height=1)
+    brief_href = f'data:application/pdf;base64,{brief_b64}' if brief_b64 else '#'
+    st.markdown("""
+<nav class="nav-bar">
+  <div class="nav-name">Yaser Alhusaini</div>
+  <div class="nav-links"><span style="font-family:'DM Mono',monospace;font-size:0.82rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(28,28,28,0.45);">Case Study — Early Retirement</span></div>
+</nav>""", unsafe_allow_html=True)
+
+    if st.button("← Back to Portfolio", key="gr_back_top"):
+        st.session_state.page = 'home'
+        st.rerun()
+
+    st.markdown("""
+<div class="cs-header">
+  <div class="cs-overline">Case Study · 02</div>
+  <h1 class="cs-title">Early Retirement<br>in the Private Sector</h1>
+  <div class="cs-line"></div>
+  <div class="cs-meta-row">
+    <div class="cs-meta-item"><span class="cs-meta-label">Partners</span><span class="cs-meta-value">Georgetown University · Harvard Kennedy School EPoD</span></div>
+    <div class="cs-meta-item"><span class="cs-meta-label">Geography</span><span class="cs-meta-value">Saudi Arabia</span></div>
+    <div class="cs-meta-item"><span class="cs-meta-label">Years</span><span class="cs-meta-value">2017 – 2018 · 2020</span></div>
+    <div class="cs-meta-item"><span class="cs-meta-label">Domain</span><span class="cs-meta-value">Labor Economics · Pension Policy · Behavioral Economics</span></div>
+  </div>
+</div>
+
+<div class="cs-body">
+  <div class="cs-section">
+    <div class="cs-section-label"><span>01</span>Context</div>
+    <div class="cs-content">
+      <h3>Why are so many Saudi private sector workers retiring too early?</h3>
+      <p>Over a five-year period, more than 57% of all private sector retirees in Saudi Arabia retired early — and among workers who were eligible for early retirement, the rate climbed to 80%. The economic stakes were significant: workers were leaving lifetime pension wealth on the table, and the Kingdom's labor market was losing experienced workers years before a financially optimal exit.</p>
+      <p>This research — conducted jointly by Georgetown University's McCourt School of Public Policy under Prof. Nada Eissa and Harvard Kennedy School's Evidence for Policy Design (EPoD) unit — set out to answer a foundational question: were Saudi private sector workers responding rationally to the incentive structure embedded in the pension system, or were uninformed decisions costing them long-term financial security?</p>
+      <p>The answer turned out to be both: the pension system was structurally incentivizing early exit, and many workers lacked full information about how their lifetime benefits would change with additional years of work.</p>
+    </div>
+  </div>
+  <div class="cs-section">
+    <div class="cs-section-label"><span>02</span>My Role</div>
+    <div class="cs-content">
+      <h3>Survey design, econometric modeling, and policy synthesis</h3>
+      <ul class="cs-bullets">
+        <li><strong>Survey design and administration</strong> — Co-designed and administered a 500-participant labor market survey on early retirement decision-making, covering worker demographics, wage histories, retirement intentions, and awareness of pension rules. Managed field coordination and ensured data quality across the full collection cycle.</li>
+        <li><strong>GOSI administrative data analysis</strong> — Analyzed national administrative data from Saudi Arabia's General Organization for Social Insurance (GOSI), covering multiple years of private sector retirement patterns across hundreds of thousands of workers.</li>
+        <li><strong>Implicit tax modeling</strong> — Modeled the implicit tax structure embedded in the Saudi pension system — calculating at each retirement age how an additional year of work would change a worker's lifetime pension wealth, and identifying the age at which total benefits are maximized.</li>
+        <li><strong>Econometric analysis</strong> — Applied regression models to estimate the behavioral drivers of early retirement, controlling for education, wage trajectories, sector, and predicted lifetime pension wealth. Classified retirees into four behavioral groups based on wage patterns and retirement timing.</li>
+        <li><strong>Policy brief synthesis</strong> — Synthesized findings into a published policy brief under the Harvard Kennedy School EPoD banner, with recommendations submitted to the Saudi Ministry of Labor and Social Development.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cs-section">
+    <div class="cs-section-label"><span>03</span>Key Findings</div>
+    <div class="cs-content">
+      <h3>Incentives shape behavior — but information gaps make it worse</h3>
+      <div class="findings-grid">
+        <div class="finding-card"><div class="finding-num">57%</div><div class="finding-desc">Of all private sector retirees over a five-year period retired before the normal retirement age — a strikingly high early retirement rate.</div></div>
+        <div class="finding-card"><div class="finding-num">80%</div><div class="finding-desc">Of workers eligible for early retirement took the early retirement option, suggesting strong responsiveness to the incentive structure.</div></div>
+        <div class="finding-card"><div class="finding-num">+20%</div><div class="finding-desc">Increase in the probability of retiring in a given year for every 50% increase in the implicit tax rate — confirming that workers respond to pension incentives.</div></div>
+        <div class="finding-card"><div class="finding-num">Age 55</div><div class="finding-desc">The age at which lifetime pension wealth is maximized for the average worker entering the private sector at 20 — yet most retire years before reaching it.</div></div>
+      </div>
+      <p style="margin-top:1.8rem;">Higher-educated workers were found to be <strong>46% more likely to retire early</strong>, holding all other factors constant. Workers with higher predicted lifetime pensions were also significantly more likely to retire early — suggesting the system's incentive structure penalized continued work most sharply for its highest-earning participants. Many workers appeared to lack complete information about how an additional year of work would affect their lifetime benefits, pointing to the value of a targeted information intervention.</p>
+    </div>
+  </div>
+  <div class="cs-section">
+    <div class="cs-section-label"><span>04</span>Policy Impact</div>
+    <div class="cs-content">
+      <h3>Recommendations adopted as national policy five years later</h3>
+      <div class="cs-callout">
+        <p>The research recommended two reforms: restructuring pension accrual rates at older ages to reduce the implicit tax on continued work — making delayed retirement more financially attractive — and implementing a targeted information intervention to help workers understand how each additional year of work would change their lifetime pension wealth.</p>
+        <p style="margin-top:1rem;">Five years after publication, the core recommendation was adopted as national policy across Saudi Arabia. The pension incentive structure for the Kingdom's private sector workforce was restructured — a direct translation of evidence-based research into government action at national scale.</p>
+      </div>
+    </div>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+    st.markdown(f"""
+<div class="cs-btn-row">
+  <a href="{brief_href}" download="Early_Retirement_Policy_Brief.pdf" class="btn-gold">Download Policy Brief (PDF)</a>
+</div>""", unsafe_allow_html=True)
+
+    if st.button("← Back to Portfolio", key="gr_back_bottom"):
+        st.session_state.page = 'home'
+        st.rerun()
+
+    st.markdown("""
+<footer class="site-footer">
+  <span class="footer-text">© 2025 Yaser Alhusaini — Policy · Data · Research</span>
+  <span class="footer-text">Case Study · Early Retirement in the Private Sector · Saudi Arabia</span>
+</footer>""", unsafe_allow_html=True)
+    st.stop()
+
 # ── Resume b64 ─────────────────────────────────────────────────────────────────
 resume_href = f'data:application/pdf;base64,{resume_b64}' if resume_b64 else '#'
 
@@ -1032,7 +1140,6 @@ st.markdown("""
         <li>Embedded within Harvard's Evidence for Policy Design (EPoD) unit in Riyadh, supporting a portfolio of 20+ active research projects at the intersection of education, labor markets, and social protection in Saudi Arabia.</li>
         <li>Managed data acquisition, cleaning, and preparation for field studies conducted in partnership with the Ministry of Labor and Social Development and the Ministry of Education — including panel datasets covering all private sector workers in the Kingdom.</li>
         <li>Oversaw the incubation of 12 new research projects: matched potential researchers with relevant government policymakers, negotiated data access agreements, and managed stakeholder relationships from project inception through delivery.</li>
-        <li>Co-developed survey instruments and analytic files for a 500-participant labor market study on early retirement patterns, managing field coordination and STATA-based analysis.</li>
         <li>Designed and delivered capacity-building workshops on evidence-based research design and Randomized Controlled Trials (RCTs) to ministry counterparts and NGO partners.</li>
         <li>Contributed to policy briefs and executive communications shared with senior officials across multiple Saudi ministries and affiliated institutions.</li>
       </ul>
@@ -1060,16 +1167,50 @@ st.markdown("""
 
   <div class="exp-item">
     <div>
-      <div class="exp-date">Jul — Oct 2020<br>May 2017 — Jul 2018</div>
+      <div class="exp-date">Aug — Dec 2020</div>
       <div class="exp-org">Georgetown University</div>
     </div>
     <div>
-      <div class="exp-title">Research Fellow &amp; Teaching Assistant</div>
+      <div class="exp-title">Teaching Assistant — Quantitative Methods III</div>
       <div class="exp-loc">Washington, DC</div>
       <ul class="exp-bullets">
-        <li>Research Fellow: co-managed a 500-participant labor market survey under a Georgetown–Harvard Kennedy School collaboration; synthesized findings into policy briefs for government and academic partners in Saudi Arabia.</li>
-        <li>Teaching Assistant: supported instruction in Quantitative Methods III — Advanced Regression and Program Evaluation Methods — advising 46 graduate students on STATA-based econometric analysis and capstone evaluations.</li>
-        <li>Georgetown awarded best capstone graduation project for equity-focused program evaluation work.</li>
+        <li>Supported instruction in Quantitative Methods III — Advanced Regression and Program Evaluation Methods — at Georgetown's McCourt School of Public Policy.</li>
+        <li>Provided guidance to 46 graduate students on interpreting econometric output, applying STATA for regression analysis, and designing rigorous program evaluations.</li>
+        <li>Contributed to course materials emphasizing data-driven policy analysis; the cohort was awarded best capstone graduation project for equity-focused program evaluation work.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div>
+      <div class="exp-date">Jul — Oct 2020<br>May 2017 — Jul 2018</div>
+      <div class="exp-org">Georgetown University</div>
+      <a href="?page=georgetown" target="_self" class="btn-exp-cs">Read case study →</a>
+    </div>
+    <div>
+      <div class="exp-title">Research Fellow — Evidence for Policy Design</div>
+      <div class="exp-loc">Washington, DC</div>
+      <ul class="exp-bullets">
+        <li>Co-investigator under Prof. Nada Eissa on a study of early retirement behavior in Saudi Arabia's private sector, analyzing national GOSI administrative data covering multiple years of private sector retirement patterns across hundreds of thousands of workers.</li>
+        <li>Co-designed and administered a 500-participant labor market survey on retirement decision-making, managing field coordination and STATA-based econometric analysis across worker demographics, wage histories, and pension awareness.</li>
+        <li>Modeled the implicit tax structure embedded in the Saudi pension system, finding that a 50% increase in the implicit tax rate raises the probability of early retirement in a given year by 20%.</li>
+        <li>Synthesized findings into a published policy brief under the Harvard Kennedy School Evidence for Policy Design (EPoD) banner, with recommendations submitted to the Saudi Ministry of Labor and Social Development.</li>
+        <li>Research recommendations on pension incentive restructuring were adopted as national policy across Saudi Arabia five years after publication, affecting retirement incentive structures for the Kingdom's entire private sector workforce.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div>
+      <div class="exp-date">Aug 2019 — May 2020</div>
+      <div class="exp-org">Aspire After-school Learning</div>
+    </div>
+    <div>
+      <div class="exp-title">Pro-Bono Consultant</div>
+      <div class="exp-loc">Washington, DC</div>
+      <ul class="exp-bullets">
+        <li>Evaluated after-school program outcomes using mixed-methods analysis, including participant surveys, observation data, and outcome tracking across program cohorts.</li>
+        <li>Delivered findings and actionable recommendations to program leadership to guide improvement of equity-focused education programs serving underserved youth.</li>
       </ul>
     </div>
   </div>
