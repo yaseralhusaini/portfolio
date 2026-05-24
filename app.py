@@ -571,9 +571,34 @@ div[data-testid="stHorizontalBlock"] {
     display: flex;
     flex-direction: column;
     gap: 1.1rem;
-    transition: background 0.2s;
+    transition: background 0.2s, box-shadow 0.2s;
 }
 .work-card:hover { background: #efece5; }
+#takafu-work-card {
+    cursor: pointer;
+    position: relative;
+    border-top: 3px solid transparent;
+    transition: background 0.2s, border-top-color 0.2s, box-shadow 0.2s;
+}
+#takafu-work-card:hover {
+    background: #efece5;
+    border-top-color: #9c6f3a;
+    box-shadow: 0 4px 20px rgba(156,111,58,0.10);
+}
+#takafu-work-card::after {
+    content: '→';
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.8rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 1.1rem;
+    color: rgba(156,111,58,0.45);
+    transition: color 0.2s, transform 0.2s;
+}
+#takafu-work-card:hover::after {
+    color: #9c6f3a;
+    transform: translateX(4px);
+}
 .work-overline {
     font-family: 'DM Mono', monospace;
     font-size: 0.80rem;
@@ -1114,7 +1139,7 @@ st.markdown("""
     <span class="section-title">Selected Work</span>
   </div>
   <div class="work-grid">
-    <div class="work-card">
+    <div class="work-card" id="takafu-work-card">
       <div class="work-overline">01 · Gender Equity Research</div>
       <div class="work-title">Takafu Equal Opportunity Index</div>
       <div class="work-meta">Gender Parity Index &nbsp;·&nbsp; Saudi Arabia &nbsp;·&nbsp; 2022</div>
@@ -1128,11 +1153,30 @@ st.markdown("""
 </section>
 """, unsafe_allow_html=True)
 
-_cs_col, _ = st.columns([1, 1])
-with _cs_col:
-    if st.button("Read case study →", key="open_takafu"):
-        st.session_state.page = 'takafu'
-        st.rerun()
+# Hidden button — card click triggers this via JS below
+if st.button("open_takafu_hidden", key="open_takafu"):
+    st.session_state.page = 'takafu'
+    st.rerun()
+
+components.html("""<script>
+(function() {
+    function init() {
+        var doc = window.parent.document;
+        var card = doc.getElementById('takafu-work-card');
+        var btn  = Array.from(doc.querySelectorAll('button'))
+                        .find(function(b) { return b.innerText.trim() === 'open_takafu_hidden'; });
+        if (!card || !btn) { setTimeout(init, 200); return; }
+
+        // Hide the button wrapper entirely
+        var wrap = btn.closest('[data-testid="stButton"]') || btn.parentElement;
+        if (wrap) wrap.style.display = 'none';
+
+        // Wire card click → button click
+        card.addEventListener('click', function() { btn.click(); });
+    }
+    setTimeout(init, 400);
+})();
+</script>""", height=1)
 
 # ── Dashboard ──────────────────────────────────────────────────────────────────
 st.markdown('<div id="dashboard"></div>', unsafe_allow_html=True)
