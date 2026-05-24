@@ -206,22 +206,24 @@ a.btn-outline:hover {
 /* ── MPP credential under hero buttons ── */
 .hero-mpp {
     margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(26,26,26,0.08);
+    padding: 1.5rem 1.8rem;
+    background: #ede9e0;
+    border-top: 2px solid #9c6f3a;
 }
-.hero-mpp .stat-num {
+.hero-mpp-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2.4rem;
-    font-weight: 300;
+    font-size: 1.55rem;
+    font-weight: 400;
     color: #1c1c1c;
-    line-height: 1;
+    line-height: 1.25;
     margin-bottom: 0.4rem;
 }
-.hero-mpp .stat-label {
-    font-size: 0.95rem;
-    letter-spacing: 0.08em;
+.hero-mpp-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(28,28,28,0.65);
+    color: rgba(28,28,28,0.60);
     line-height: 1.5;
 }
 .stat-row {
@@ -251,19 +253,28 @@ a.btn-outline:hover {
     padding: 4rem 4rem;
     border-bottom: 1px solid rgba(26,26,26,0.06);
 }
+.section-alt {
+    background: #edeae2;
+}
+.section-alt .skill-card { background: #edeae2; }
+.section-alt .skill-card:hover { background: #e4e0d6; }
 .section-header {
     display: flex;
     align-items: baseline;
     gap: 1.5rem;
     margin-bottom: 3.5rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(26,26,26,0.08);
+    border-bottom: 2px solid rgba(156,111,58,0.22);
 }
 .section-num {
     font-family: 'DM Mono', monospace;
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     color: #9c6f3a;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.12em;
+    border: 1px solid rgba(156,111,58,0.50);
+    padding: 0.2rem 0.55rem;
+    line-height: 1;
+    flex-shrink: 0;
 }
 .section-title {
     font-family: 'Cormorant Garamond', serif;
@@ -567,8 +578,8 @@ st.markdown(f"""
       <a href="https://www.linkedin.com/in/yaser-alhusaini-43330b281/" target="_blank" class="btn-outline">LinkedIn</a>
     </div>
     <div class="hero-mpp">
-      <div class="stat-num">MPP</div>
-      <div class="stat-label">Georgetown McCourt School of Public Policy</div>
+      <div class="hero-mpp-title">Master of Public Policy</div>
+      <div class="hero-mpp-sub">Georgetown McCourt School · MPP</div>
     </div>
   </section>
 
@@ -728,7 +739,7 @@ st.markdown("""
 
 # ── Education ──────────────────────────────────────────────────────────────────
 st.markdown("""
-<section class="section">
+<section class="section section-alt">
   <div class="section-header">
     <span class="section-num">02</span>
     <span class="section-title">Education</span>
@@ -1149,7 +1160,7 @@ with st.container():
 # ── Services ───────────────────────────────────────────────────────────────────
 st.markdown('<div id="services"></div>', unsafe_allow_html=True)
 st.markdown("""
-<section class="section">
+<section class="section section-alt">
   <div class="section-header">
     <span class="section-num">05</span>
     <span class="section-title">Services</span>
