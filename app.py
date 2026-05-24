@@ -108,7 +108,7 @@ section[data-testid="stSidebar"] { display: none; }
     line-height: 1.85;
     color: rgba(28,28,28,0.80);
     max-width: 580px;
-    margin-bottom: 2.8rem;
+    margin-bottom: 3.8rem;
 }
 .hero-cta-row { display: flex; gap: 1.2rem; flex-wrap: wrap; }
 .btn-gold {
@@ -372,7 +372,7 @@ section[data-testid="stSidebar"] { display: none; }
     font-weight: 300;
     line-height: 1.85;
     color: rgba(28,28,28,0.72);
-    margin-bottom: 2.5rem;
+    margin-bottom: 3.5rem;
 }
 .contact-item {
     display: flex;
@@ -414,7 +414,44 @@ section[data-testid="stSidebar"] { display: none; }
 
 /* ── Streamlit overrides ── */
 div[data-testid="stMarkdownContainer"] p { margin: 0; }
-.stPlotlyChart { border: 1px solid rgba(26,26,26,0.08) !important; }
+.stPlotlyChart {
+    border: 1px solid rgba(26,26,26,0.10) !important;
+    margin: 0 3rem 1.5rem !important;
+}
+
+/* Fix invisible white text in Streamlit widgets */
+[data-testid="stWidgetLabel"],
+[data-testid="stWidgetLabel"] p,
+[data-testid="stWidgetLabel"] label,
+.stSelectbox > label,
+.stCheckbox > label,
+[data-baseweb="select"] span,
+[data-baseweb="menu"] li,
+[data-baseweb="menu"] li span,
+div[data-testid="stSelectbox"] label,
+div[data-testid="stCheckbox"] label {
+    color: #1c1c1c !important;
+}
+
+/* Dashboard chart container horizontal padding */
+div[data-testid="stHorizontalBlock"] {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+
+/* Featured service card (spans full row) */
+.skill-card-featured {
+    background: #ede9e0;
+    padding: 2.2rem 2.5rem;
+    grid-column: span 3;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+    border-top: 2px solid #9c6f3a;
+    transition: background 0.2s;
+}
+.skill-card-featured:hover { background: #e5e0d6; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -461,7 +498,7 @@ st.markdown(f"""
       <div class="stat-label">Research projects managed</div>
     </div>
     <div class="stat-row">
-      <div class="stat-num">10<span>+</span></div>
+      <div class="stat-num">30<span>+</span></div>
       <div class="stat-label">Staff trained in data &amp; evaluation</div>
     </div>
     <div class="stat-row">
@@ -684,15 +721,11 @@ st.markdown("""
     </div>
     <div class="skill-card">
       <div class="skill-cat">Web Development</div>
-      <div class="skill-items">Website design &amp; development<br>Streamlit application development<br>Interactive data dashboards for web<br>Site deployment &amp; management<br>Web-based reporting systems</div>
+      <div class="skill-items">Website design &amp; development<br>Wix · Squarespace · WordPress<br>Streamlit application development<br>Interactive dashboards for web<br>Site deployment &amp; management<br>Web-based reporting systems</div>
     </div>
     <div class="skill-card">
-      <div class="skill-cat">International Experience</div>
-      <div class="skill-items">United States<br>United Kingdom<br>Saudi Arabia</div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-cat">Languages &amp; Certifications</div>
-      <div class="skill-items">English — Fluent<br>Arabic — Native<br>MIT J-PAL Research Methods<br>CFA Level I</div>
+      <div class="skill-cat">International &amp; Languages</div>
+      <div class="skill-items">United States · United Kingdom · Saudi Arabia<br>English — Fluent<br>Arabic — Native<br>MIT J-PAL Research Methods<br>CFA Level I</div>
     </div>
   </div>
 </section>
@@ -849,9 +882,17 @@ with st.container():
                 mode="lines",
                 hovertemplate="<b>National</b>  %{x}: <b>%{y:.1f}%</b><extra></extra>"
             ))
-        fig.add_annotation(x="Jul 25", y=5.8, text="DC leads US<br>unemployment",
-                           showarrow=True, arrowhead=0, arrowcolor=CRIMSON,
-                           font=dict(size=12, color=CRIMSON), ay=-45)
+        fig.add_annotation(
+            x="Jul 25", y=6.0,
+            text="DC leads US<br>unemployment",
+            showarrow=True, arrowhead=2, arrowwidth=1.5, arrowcolor=CRIMSON,
+            font=dict(size=12, color=CRIMSON, family=FONT),
+            ax=65, ay=-80,
+            bgcolor="rgba(255,255,255,0.94)",
+            bordercolor=CRIMSON,
+            borderwidth=1,
+            borderpad=6,
+        )
 
         layout = base_layout.copy()
         layout.update(dict(
@@ -1022,6 +1063,14 @@ st.markdown("""
       <div class="skill-cat">06</div>
       <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:#1c1c1c;margin-bottom:0.8rem;">Field Research Operations</div>
       <div class="skill-items">Design and manage large-scale surveys and field data collection across labor market, education, and social protection studies — from Saudi Arabia's private sector to DC youth programs.</div>
+    </div>
+    <div class="skill-card-featured">
+      <div>
+        <div class="skill-cat">07</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:#1c1c1c;margin-bottom:0.5rem;line-height:1.3;">Website Development<br>&amp; Management</div>
+      </div>
+      <div class="skill-items">Design, build, and maintain professional websites and web-based data tools — from organizational landing pages and portfolio sites to fully interactive dashboards and automated reporting platforms.
+        Built using Wix, Squarespace, WordPress, and custom Python/Streamlit applications. Ongoing management includes content updates, performance monitoring, and continuous improvement based on site analytics.</div>
     </div>
   </div>
 </section>
