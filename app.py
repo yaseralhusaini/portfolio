@@ -351,6 +351,26 @@ a.btn-outline:hover {
     color: #9c6f3a;
 }
 
+/* ── Experience case study link ── */
+.exp-case-link {
+    display: inline-block;
+    margin-top: 1.2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9c6f3a;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(156,111,58,0.35);
+    padding-bottom: 0.15rem;
+    transition: color 0.2s, border-bottom-color 0.2s;
+}
+.exp-case-link:hover {
+    color: #6b4718;
+    border-bottom-color: #6b4718;
+}
+
 /* ── Skills grid ── */
 .skills-grid {
     display: grid;
@@ -970,17 +990,11 @@ st.markdown("""
         <li>Designed and analyzed dual survey instruments — one targeting HR managers, one targeting employees — collecting responses from 57 companies and 985 Saudi workers across Riyadh, Makkah, and the Eastern Province.</li>
         <li>Synthesized quantitative findings and qualitative survey data into the published Takafu 2020 Executive Summary, with policy and employer recommendations cited by government stakeholders aligned to Saudi Vision 2030.</li>
       </ul>
+      <a href="?page=takafu" class="exp-case-link">Read Takafu case study →</a>
     </div>
   </div>
 </div>
 """, unsafe_allow_html=True)
-
-# Button under Alnahda — indented to align with the exp-item content column
-_, _alnahda_btn_col = st.columns([1, 4])
-with _alnahda_btn_col:
-    if st.button("Read Takafu case study →", key="alnahda_takafu"):
-        st.session_state.page = 'takafu'
-        st.rerun()
 
 st.markdown("""
 <div class="section" style="padding-top:2rem;">
