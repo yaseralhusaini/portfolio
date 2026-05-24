@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import base64
+import os
 
 st.set_page_config(
     page_title="Yaser Alhusaini",
@@ -11,22 +12,18 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-def get_resume_b64():
+# Resolve paths relative to this script file so they work regardless of cwd
+_DIR = os.path.dirname(os.path.abspath(__file__))
+
+def get_file_b64(filename):
     try:
-        with open("resume.pdf", "rb") as f:
+        with open(os.path.join(_DIR, filename), "rb") as f:
             return base64.b64encode(f.read()).decode()
     except:
         return None
 
-def get_photo_b64():
-    try:
-        with open("photo_nobg.png", "rb") as f:
-            return base64.b64encode(f.read()).decode()
-    except:
-        return None
-
-resume_b64 = get_resume_b64()
-photo_b64  = get_photo_b64()
+resume_b64 = get_file_b64("resume.pdf")
+photo_b64  = get_file_b64("photo_nobg.png")
 
 st.markdown("""
 <style>
@@ -1113,9 +1110,13 @@ with st.container():
                 zeroline=True,
                 zerolinecolor="rgba(28,28,28,0.20)",
                 zerolinewidth=1,
+                side="right",
+                showline=True,
+                linecolor="rgba(28,28,28,0.15)",
             ),
             height=520,
             barmode="overlay",
+            margin=dict(l=60, r=90, t=110, b=60),
         ))
         fig.update_layout(**layout)
         st.plotly_chart(fig, use_container_width=True)
