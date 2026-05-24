@@ -1499,9 +1499,11 @@ st.markdown("""
       <div class="exp-title">Pro-Bono Consultant</div>
       <div class="exp-loc">Washington, DC</div>
       <ul class="exp-bullets">
-        <li>Evaluated socio-emotional learning (SEL) frameworks implemented across after-school programs, assessing each framework's evidence base, effectiveness, and measured impact on student outcomes through mixed-methods analysis.</li>
-        <li>Recommended a suite of best-practice, evidence-based SEL frameworks to program leadership, with an implementation roadmap to strengthen equity-focused education outcomes for underserved youth.</li>
-        <li>This evaluation served as the Georgetown McCourt capstone project, which was awarded best capstone graduation project in the cohort.</li>
+        <li>Led quantitative program evaluation for Aspire! Afterschool Learning, analyzing reading and homework outcomes for 82 low-income, predominantly Hispanic students across three school years (2016–2019) using descriptive statistical analysis.</li>
+        <li>Designed a propensity score matching (PSM) evaluation framework to estimate causal program impact against similar non-participating students; when individual-level comparison data was unavailable, pivoted to rigorous descriptive analysis and documented a clear methodology roadmap for future causal evaluation.</li>
+        <li>Conducted a comprehensive review and comparative evaluation of evidence-based socio-emotional learning (SEL) frameworks, ranking each by effectiveness, implementation fit, and relevance to Aspire's student population — synthesizing findings into prioritized adoption recommendations.</li>
+        <li>Delivered a 50+ page consulting report with four recommendation tracks: impact evaluation design, SEL framework adoption, implementation evaluation, and longitudinal study architecture.</li>
+        <li>Engagement served as the Georgetown McCourt capstone project, awarded best capstone graduation project in the cohort.</li>
       </ul>
     </div>
   </div>
