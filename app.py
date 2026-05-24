@@ -112,7 +112,7 @@ h1, h2, h3, h4, h5, h6 { color: #1c1c1c !important; }
     animation: expandWidth 1s ease 0.8s both;
 }
 .hero-desc {
-    font-size: 1.45rem;
+    font-size: 1.72rem;
     font-weight: 300;
     line-height: 1.85;
     color: rgba(28,28,28,0.80);
@@ -369,7 +369,7 @@ a.btn-outline:hover {
 
 /* ── Dashboard ── */
 .dash-intro {
-    font-size: 1.32rem;
+    font-size: 1.6rem;
     font-weight: 300;
     line-height: 1.85;
     color: rgba(28,28,28,0.78);
@@ -449,7 +449,7 @@ a.btn-outline:hover {
     margin-bottom: 1.5rem;
 }
 .contact-sub {
-    font-size: 1.38rem;
+    font-size: 1.65rem;
     font-weight: 300;
     line-height: 1.85;
     color: rgba(28,28,28,0.72);
