@@ -60,18 +60,22 @@ section[data-testid="stSidebar"] { display: none; }
     font-size: 0.82rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(28,28,28,0.5);
+    color: rgba(28,28,28,0.65);
     text-decoration: none;
     transition: color 0.2s;
 }
 .nav-links a:hover { color: #1c1c1c; }
 
-/* ── Hero ── */
-.hero-section {
-    padding: 5rem 4rem 4rem;
+/* ── Hero + Stats side by side ── */
+.hero-stats-row {
+    display: flex;
+    align-items: stretch;
     border-bottom: 1px solid rgba(26,26,26,0.08);
     animation: fadeUp 0.9s ease 0.15s both;
-    max-width: 820px;
+}
+.hero-content {
+    padding: 5rem 4rem 4rem;
+    flex: 0 0 56%;
 }
 .hero-overline {
     font-family: 'DM Mono', monospace;
@@ -102,7 +106,7 @@ section[data-testid="stSidebar"] { display: none; }
     font-size: 1.08rem;
     font-weight: 300;
     line-height: 1.85;
-    color: rgba(28,28,28,0.65);
+    color: rgba(28,28,28,0.80);
     max-width: 580px;
     margin-bottom: 2.8rem;
 }
@@ -134,25 +138,26 @@ section[data-testid="stSidebar"] { display: none; }
     letter-spacing: 0.14em;
     text-transform: uppercase;
     text-decoration: none;
-    border: 1px solid rgba(28,28,28,0.3);
+    border: 1px solid rgba(28,28,28,0.4);
     cursor: pointer;
     transition: border-color 0.2s, color 0.2s;
 }
 .btn-outline:hover { border-color: #1c1c1c; }
 
-/* ── Stats strip ── */
-.stats-strip {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-top: 1px solid rgba(26,26,26,0.08);
+/* ── Stats column (right of hero) ── */
+.stats-column {
+    flex: 1;
+    border-left: 1px solid rgba(26,26,26,0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem 3.5rem;
+}
+.stat-row {
+    padding: 1.8rem 0;
     border-bottom: 1px solid rgba(26,26,26,0.08);
-    margin: 0;
 }
-.stat-item {
-    padding: 2.5rem 2.5rem;
-    border-right: 1px solid rgba(26,26,26,0.08);
-}
-.stat-item:last-child { border-right: none; }
+.stat-row:last-child { border-bottom: none; }
 .stat-num {
     font-family: 'Cormorant Garamond', serif;
     font-size: 3rem;
@@ -163,10 +168,10 @@ section[data-testid="stSidebar"] { display: none; }
 }
 .stat-num span { color: #9c6f3a; }
 .stat-label {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(28,28,28,0.45);
+    color: rgba(28,28,28,0.65);
     line-height: 1.5;
 }
 
@@ -215,7 +220,7 @@ section[data-testid="stSidebar"] { display: none; }
 }
 .exp-org {
     font-size: 0.82rem;
-    color: rgba(28,28,28,0.45);
+    color: rgba(28,28,28,0.60);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     margin-top: 0.4rem;
@@ -230,7 +235,7 @@ section[data-testid="stSidebar"] { display: none; }
 }
 .exp-loc {
     font-size: 0.8rem;
-    color: rgba(28,28,28,0.38);
+    color: rgba(28,28,28,0.55);
     letter-spacing: 0.06em;
     margin-bottom: 1.2rem;
 }
@@ -238,7 +243,7 @@ section[data-testid="stSidebar"] { display: none; }
 .exp-bullets li {
     font-size: 0.95rem;
     font-weight: 300;
-    color: rgba(28,28,28,0.72);
+    color: rgba(28,28,28,0.82);
     line-height: 1.8;
     padding-left: 1.2rem;
     position: relative;
@@ -276,7 +281,7 @@ section[data-testid="stSidebar"] { display: none; }
 .skill-items {
     font-size: 0.95rem;
     font-weight: 300;
-    color: rgba(28,28,28,0.65);
+    color: rgba(28,28,28,0.80);
     line-height: 2;
 }
 
@@ -285,7 +290,7 @@ section[data-testid="stSidebar"] { display: none; }
     font-size: 0.98rem;
     font-weight: 300;
     line-height: 1.85;
-    color: rgba(28,28,28,0.6);
+    color: rgba(28,28,28,0.78);
     max-width: 700px;
     margin-bottom: 2.5rem;
 }
@@ -293,20 +298,22 @@ section[data-testid="stSidebar"] { display: none; }
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1px;
-    background: rgba(26,26,26,0.08);
-    border: 1px solid rgba(26,26,26,0.08);
+    background: rgba(26,26,26,0.12);
+    border: 1px solid rgba(26,26,26,0.12);
     margin-bottom: 2.5rem;
 }
 .live-cell {
-    background: #f0ede6;
+    background: #ffffff;
     padding: 1.8rem 2rem;
 }
 .live-period {
     font-family: 'DM Mono', monospace;
     font-size: 0.68rem;
     letter-spacing: 0.12em;
-    color: rgba(28,28,28,0.4);
+    color: rgba(28,28,28,0.65);
     margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
 }
 .live-val {
     font-family: 'Cormorant Garamond', serif;
@@ -318,24 +325,32 @@ section[data-testid="stSidebar"] { display: none; }
 }
 .live-val.danger { color: #a32020; }
 .live-lbl {
-    font-size: 0.82rem;
-    font-weight: 300;
-    color: rgba(28,28,28,0.55);
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: rgba(28,28,28,0.75);
     margin-bottom: 0.5rem;
 }
-.live-delta { font-family: 'DM Mono', monospace; font-size: 0.75rem; }
+.live-delta { font-family: 'DM Mono', monospace; font-size: 0.78rem; }
 .delta-bad { color: #a32020; }
 .delta-ok { color: #2d6e42; }
+
+/* ── Live pulse dot — bigger and more dramatic ── */
 .pulse-dot {
     display: inline-block;
-    width: 6px; height: 6px;
+    width: 13px;
+    height: 13px;
     border-radius: 50%;
     background: #a32020;
-    margin-right: 6px;
-    animation: pulse 2s infinite;
-    vertical-align: middle;
+    margin-right: 8px;
+    flex-shrink: 0;
+    animation: pulse-ring 1.4s ease-out infinite;
+    box-shadow: 0 0 0 0 rgba(163,32,32,0.5);
 }
-@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+@keyframes pulse-ring {
+    0%   { box-shadow: 0 0 0 0 rgba(163,32,32,0.55); opacity: 1; }
+    60%  { box-shadow: 0 0 0 10px rgba(163,32,32,0); opacity: 0.85; }
+    100% { box-shadow: 0 0 0 0 rgba(163,32,32,0); opacity: 1; }
+}
 
 /* ── Contact ── */
 .contact-grid {
@@ -356,7 +371,7 @@ section[data-testid="stSidebar"] { display: none; }
     font-size: 0.98rem;
     font-weight: 300;
     line-height: 1.85;
-    color: rgba(28,28,28,0.55);
+    color: rgba(28,28,28,0.72);
     margin-bottom: 2.5rem;
 }
 .contact-item {
@@ -367,7 +382,7 @@ section[data-testid="stSidebar"] { display: none; }
     border-top: 1px solid rgba(26,26,26,0.07);
     font-size: 0.95rem;
     font-weight: 300;
-    color: rgba(28,28,28,0.75);
+    color: rgba(28,28,28,0.85);
 }
 .contact-icon {
     font-family: 'DM Mono', monospace;
@@ -389,7 +404,7 @@ section[data-testid="stSidebar"] { display: none; }
     font-family: 'DM Mono', monospace;
     font-size: 0.72rem;
     letter-spacing: 0.08em;
-    color: rgba(28,28,28,0.3);
+    color: rgba(28,28,28,0.55);
 }
 
 /* ── Keyframes ── */
@@ -419,45 +434,44 @@ st.markdown("""
 </nav>
 """, unsafe_allow_html=True)
 
-# ── Hero ───────────────────────────────────────────────────────────────────────
+# ── Hero + Stats (side by side) ────────────────────────────────────────────────
 st.markdown(f"""
-<section class="hero-section">
-  <div class="hero-overline">Policy · Data · Research · Impact</div>
-  <h1 class="hero-title">
-    Research that<br>moves people<br><em>forward.</em>
-  </h1>
-  <div class="hero-line"></div>
-  <p class="hero-desc">
-    Public policy analyst, data strategist, and program evaluator with a decade of experience
-    spanning workforce development, education policy, economic research, and direct service —
-    from DC's frontlines to the World Bank and Harvard Kennedy School.
-  </p>
-  <div class="hero-cta-row">
-    <a href="#dashboard" class="btn-gold">View Dashboard</a>
-    <a href="{resume_href}" download="Yaser_Alhusaini_Resume.pdf" class="btn-outline">Download Resume</a>
-    <a href="https://www.linkedin.com/in/yaser-alhusaini-43330b281/" target="_blank" class="btn-outline">LinkedIn</a>
-  </div>
-</section>
-""", unsafe_allow_html=True)
+<div class="hero-stats-row">
+  <section class="hero-content">
+    <div class="hero-overline">Policy · Data · Research · Impact</div>
+    <h1 class="hero-title">
+      Research that<br>moves people<br><em>forward.</em>
+    </h1>
+    <div class="hero-line"></div>
+    <p class="hero-desc">
+      Public policy analyst, data strategist, and program evaluator with a decade of experience
+      spanning workforce development, education policy, economic research, and direct service —
+      from DC's frontlines to the World Bank and Harvard Kennedy School.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#dashboard" class="btn-gold">View Dashboard</a>
+      <a href="{resume_href}" download="Yaser_Alhusaini_Resume.pdf" class="btn-outline">Download Resume</a>
+      <a href="https://www.linkedin.com/in/yaser-alhusaini-43330b281/" target="_blank" class="btn-outline">LinkedIn</a>
+    </div>
+  </section>
 
-# ── Stats strip ────────────────────────────────────────────────────────────────
-st.markdown("""
-<div class="stats-strip">
-  <div class="stat-item">
-    <div class="stat-num">20<span>+</span></div>
-    <div class="stat-label">Research projects managed</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">10<span>+</span></div>
-    <div class="stat-label">Staff trained in data &amp; evaluation</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">3</div>
-    <div class="stat-label">Countries — United States · United Kingdom · Saudi Arabia</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">MPP</div>
-    <div class="stat-label">Georgetown McCourt School of Public Policy</div>
+  <div class="stats-column">
+    <div class="stat-row">
+      <div class="stat-num">50<span>+</span></div>
+      <div class="stat-label">Research projects managed</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-num">10<span>+</span></div>
+      <div class="stat-label">Staff trained in data &amp; evaluation</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Countries — United States · United Kingdom · Saudi Arabia</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-num">MPP</div>
+      <div class="stat-label">Georgetown McCourt School of Public Policy</div>
+    </div>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -669,6 +683,10 @@ st.markdown("""
       <div class="skill-items">Policy briefs &amp; memos<br>Executive briefings<br>Analytical reports<br>Stakeholder presentations<br>Staff training &amp; capacity building<br>Cross-agency coordination</div>
     </div>
     <div class="skill-card">
+      <div class="skill-cat">Web Development</div>
+      <div class="skill-items">Website design &amp; development<br>Streamlit application development<br>Interactive data dashboards for web<br>Site deployment &amp; management<br>Web-based reporting systems</div>
+    </div>
+    <div class="skill-card">
       <div class="skill-cat">International Experience</div>
       <div class="skill-items">United States<br>United Kingdom<br>Saudi Arabia</div>
     </div>
@@ -714,7 +732,7 @@ st.markdown("""
     <div class="live-period"><span class="pulse-dot"></span>2025 Annual Ranking</div>
     <div class="live-val">#1</div>
     <div class="live-lbl">Home Listing Surge, US Metros</div>
-    <div class="live-delta" style="color:rgba(28,28,28,0.4);font-family:'DM Mono',monospace;font-size:0.75rem;">Largest inventory jump in the country</div>
+    <div class="live-delta" style="color:rgba(28,28,28,0.6);font-family:'DM Mono',monospace;font-size:0.75rem;">Largest inventory jump in the country</div>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -749,37 +767,46 @@ with st.container():
             )
 
     # ── Plotly shared theme ──────────────────────────────────────────────────
-    BG       = "#f7f5f0"
-    GRID     = "rgba(28,28,28,0.06)"
-    TICK     = "rgba(28,28,28,0.45)"
-    GOLD     = "#9c6f3a"
-    CRIMSON  = "#a32020"
-    NAVY     = "#2a4e7a"
-    MUTED    = "rgba(28,28,28,0.35)"
-    FONT     = "Jost, sans-serif"
+    BG      = "#f7f5f0"
+    PLOT_BG = "#ffffff"
+    GRID    = "rgba(28,28,28,0.10)"
+    TICK    = "rgba(28,28,28,0.75)"
+    GOLD    = "#9c6f3a"
+    CRIMSON = "#a32020"
+    NAVY    = "#2a4e7a"
+    MUTED   = "rgba(28,28,28,0.55)"
+    FONT    = "Jost, sans-serif"
 
     base_layout = dict(
         paper_bgcolor=BG,
-        plot_bgcolor=BG,
+        plot_bgcolor=PLOT_BG,
         font=dict(family=FONT, color=TICK, size=13),
-        margin=dict(l=10, r=10, t=50, b=10),
+        margin=dict(l=60, r=30, t=110, b=60),
         legend=dict(
-            bgcolor="rgba(247,245,240,0.95)",
-            bordercolor="rgba(28,28,28,0.12)",
+            bgcolor="rgba(255,255,255,0.97)",
+            bordercolor="rgba(28,28,28,0.20)",
             borderwidth=1,
-            font=dict(size=13, color="#1c1c1c"),
+            font=dict(size=15, color="#1c1c1c", family=FONT),
             orientation="h",
             yanchor="bottom",
-            y=1.02,
+            y=1.04,
             xanchor="left",
             x=0,
+            itemsizing="constant",
+            tracegroupgap=8,
         ),
-        xaxis=dict(gridcolor=GRID, tickcolor=TICK, linecolor=GRID, zeroline=False, tickfont=dict(size=12)),
-        yaxis=dict(gridcolor=GRID, tickcolor=TICK, linecolor=GRID, zeroline=False, tickfont=dict(size=12)),
+        xaxis=dict(
+            gridcolor=GRID, tickcolor=TICK, linecolor="rgba(28,28,28,0.15)",
+            zeroline=False, tickfont=dict(size=13, color=TICK),
+        ),
+        yaxis=dict(
+            gridcolor=GRID, tickcolor=TICK, linecolor="rgba(28,28,28,0.15)",
+            zeroline=False, tickfont=dict(size=13, color=TICK),
+        ),
         hoverlabel=dict(
             bgcolor="#ffffff",
             bordercolor=GOLD,
-            font=dict(family=FONT, color="#1c1c1c", size=13)
+            font=dict(family=FONT, color="#1c1c1c", size=14)
         ),
     )
 
@@ -799,26 +826,26 @@ with st.container():
 
         fig = go.Figure()
         fig.add_vrect(x0="Jan 25", x1="Feb 26",
-                      fillcolor="rgba(163,32,32,0.04)", line_width=0,
+                      fillcolor="rgba(163,32,32,0.05)", line_width=0,
                       annotation_text="Post-DOGE period",
                       annotation_position="top left",
-                      annotation_font=dict(color=MUTED, size=11))
+                      annotation_font=dict(color="rgba(28,28,28,0.60)", size=12))
         fig.add_trace(go.Scatter(
             x=months, y=dc_city, name="DC City (seas. adj.)",
-            line=dict(color=CRIMSON, width=2.5),
-            mode="lines+markers", marker=dict(size=5),
+            line=dict(color=CRIMSON, width=3),
+            mode="lines+markers", marker=dict(size=6),
             hovertemplate="<b>DC City</b>  %{x}: <b>%{y:.1f}%</b><extra></extra>"
         ))
         fig.add_trace(go.Scatter(
             x=months, y=dc_md, name="DC–MD Metro Division",
-            line=dict(color=GOLD, width=2.5),
-            mode="lines+markers", marker=dict(size=5),
+            line=dict(color=GOLD, width=3),
+            mode="lines+markers", marker=dict(size=6),
             hovertemplate="<b>DC–MD Metro</b>  %{x}: <b>%{y:.1f}%</b><extra></extra>"
         ))
         if show_nat:
             fig.add_trace(go.Scatter(
                 x=months, y=national, name="National",
-                line=dict(color=MUTED, width=1.5, dash="dot"),
+                line=dict(color="#555555", width=2, dash="dot"),
                 mode="lines",
                 hovertemplate="<b>National</b>  %{x}: <b>%{y:.1f}%</b><extra></extra>"
             ))
@@ -829,10 +856,10 @@ with st.container():
         layout = base_layout.copy()
         layout.update(dict(
             title=dict(text="DMV Unemployment Rate vs. National — Jan 2024 to Feb 2026",
-                       font=dict(size=16, color="#1c1c1c"), x=0.01),
+                       font=dict(size=17, color="#1c1c1c", family=FONT), x=0.01, y=0.97),
             yaxis=dict(**base_layout["yaxis"], ticksuffix="%",
-                       title=dict(text="Unemployment Rate", font=dict(size=13))),
-            height=500,
+                       title=dict(text="Unemployment Rate", font=dict(size=14, color=TICK))),
+            height=520,
         ))
         fig.update_layout(**layout)
         st.plotly_chart(fig, use_container_width=True)
@@ -871,25 +898,28 @@ with st.container():
             hovertemplate="<b>%{y}</b><br>Jobs lost: <b>%{x:,}</b><br>%{customdata}<extra></extra>",
             text=df["Jobs Lost"].apply(lambda x: f"{x:,}"),
             textposition="outside",
-            textfont=dict(color="#1c1c1c", size=12),
+            textfont=dict(color="#1c1c1c", size=13),
         ))
         layout = base_layout.copy()
         layout.update(dict(
             title=dict(text="DMV Job Losses by Sector — 2025 Year-over-Year",
-                       font=dict(size=16, color="#1c1c1c"), x=0.01),
-            xaxis=dict(**base_layout["xaxis"], title=dict(text="Jobs Lost", font=dict(size=13)), tickformat=","),
-            height=440,
+                       font=dict(size=17, color="#1c1c1c", family=FONT), x=0.01, y=0.97),
+            xaxis=dict(**base_layout["xaxis"],
+                       title=dict(text="Jobs Lost", font=dict(size=14, color=TICK)),
+                       tickformat=","),
+            height=460,
             showlegend=False,
+            margin=dict(l=200, r=60, t=80, b=60),
         ))
         fig.update_layout(**layout)
         st.plotly_chart(fig, use_container_width=True)
 
         # Inline legend
         st.markdown(f"""
-        <div style="display:flex;gap:2rem;padding:0.6rem 0 1rem;font-size:0.85rem;color:rgba(28,28,28,0.6);font-family:'Jost',sans-serif;">
-          <span><span style="color:{CRIMSON};font-size:1.1rem;">■</span>&nbsp; Direct — Federal</span>
-          <span><span style="color:{GOLD};font-size:1.1rem;">■</span>&nbsp; Direct — Contracting</span>
-          <span><span style="color:{NAVY};font-size:1.1rem;">■</span>&nbsp; Downstream</span>
+        <div style="display:flex;gap:2.5rem;padding:0.8rem 0 1.2rem;font-size:0.9rem;color:rgba(28,28,28,0.80);font-family:'Jost',sans-serif;font-weight:400;">
+          <span><span style="color:{CRIMSON};font-size:1.2rem;">■</span>&nbsp; Direct — Federal</span>
+          <span><span style="color:{GOLD};font-size:1.2rem;">■</span>&nbsp; Direct — Contracting</span>
+          <span><span style="color:{NAVY};font-size:1.2rem;">■</span>&nbsp; Downstream</span>
         </div>
         """, unsafe_allow_html=True)
 
@@ -907,10 +937,10 @@ with st.container():
 
         fig = make_subplots(specs=[[{"secondary_y": True}]])
         fig.add_vrect(x0="Jan 25", x1="Feb 26",
-                      fillcolor="rgba(163,32,32,0.04)", line_width=0)
+                      fillcolor="rgba(163,32,32,0.05)", line_width=0)
 
         if metric in ["Both", "Listings only"]:
-            bar_colors = [GOLD if i >= 12 else "rgba(156,111,58,0.3)" for i in range(len(months))]
+            bar_colors = [GOLD if i >= 12 else "rgba(156,111,58,0.35)" for i in range(len(months))]
             fig.add_trace(go.Bar(
                 x=months, y=listings, name="Active Listings",
                 marker=dict(color=bar_colors, line=dict(width=0)),
@@ -921,28 +951,32 @@ with st.container():
             pc_colors = [CRIMSON if v < 0 else "#2d6e42" for v in price_chg]
             fig.add_trace(go.Scatter(
                 x=months, y=price_chg, name="Median Price Change YoY %",
-                line=dict(color=CRIMSON, width=2.5),
+                line=dict(color=CRIMSON, width=3),
                 mode="lines+markers",
-                marker=dict(size=6, color=pc_colors),
+                marker=dict(size=7, color=pc_colors),
                 hovertemplate="<b>Price Change</b>  %{x}: <b>%{y:+.1f}%</b><extra></extra>",
             ), secondary_y=True)
 
         fig.add_hline(y=0, secondary_y=True,
-                      line=dict(color="rgba(28,28,28,0.2)", width=1, dash="dot"))
+                      line=dict(color="rgba(28,28,28,0.25)", width=1, dash="dot"))
         fig.add_annotation(x="Jul 25", y=10800,
                            text="Listings peak +41% YoY",
                            showarrow=True, arrowhead=0, arrowcolor=GOLD,
-                           font=dict(size=12, color=GOLD), ay=-45)
+                           font=dict(size=12, color=GOLD), ay=-50)
 
         layout = base_layout.copy()
         layout.update(dict(
             title=dict(text="DMV Housing: Listing Surge vs. Price Pressure — 2024 to 2026",
-                       font=dict(size=16, color="#1c1c1c"), x=0.01),
+                       font=dict(size=17, color="#1c1c1c", family=FONT), x=0.01, y=0.97),
             yaxis=dict(**base_layout["yaxis"],
-                       title=dict(text="Active Listings", font=dict(size=13)), tickformat=","),
-            yaxis2=dict(title=dict(text="Price Change YoY %", font=dict(size=13)),
-                        ticksuffix="%", gridcolor=GRID, tickfont=dict(size=12, color=TICK)),
-            height=500,
+                       title=dict(text="Active Listings", font=dict(size=14, color=TICK)),
+                       tickformat=","),
+            yaxis2=dict(
+                title=dict(text="Price Change YoY %", font=dict(size=14, color=TICK)),
+                ticksuffix="%", gridcolor="rgba(0,0,0,0)",
+                tickfont=dict(size=13, color=TICK),
+            ),
+            height=520,
             barmode="overlay",
         ))
         fig.update_layout(**layout)
@@ -1030,7 +1064,7 @@ st.markdown(f"""
       <div class="contact-item">
         <span class="contact-icon">LINKEDIN</span>
         <a href="https://www.linkedin.com/in/yaser-alhusaini-43330b281/" target="_blank"
-           style="color:rgba(28,28,28,0.7);text-decoration:none;">linkedin.com/in/yaser-alhusaini-43330b281</a>
+           style="color:rgba(28,28,28,0.85);text-decoration:none;">linkedin.com/in/yaser-alhusaini-43330b281</a>
       </div>
       <div class="contact-item">
         <span class="contact-icon">STATUS</span>
