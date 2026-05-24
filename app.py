@@ -18,7 +18,15 @@ def get_resume_b64():
     except:
         return None
 
+def get_photo_b64():
+    try:
+        with open("photo_nobg.png", "rb") as f:
+            return base64.b64encode(f.read()).decode()
+    except:
+        return None
+
 resume_b64 = get_resume_b64()
+photo_b64  = get_photo_b64()
 
 st.markdown("""
 <style>
@@ -124,43 +132,78 @@ h1, h2, h3, h4, h5, h6 { color: #1c1c1c !important; }
     display: inline-block;
     padding: 0.9rem 2.2rem;
     background: #6b4718;
-    color: #ffffff;
+    color: #ffffff !important;
     font-family: 'Jost', sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    text-decoration: none;
+    text-decoration: none !important;
     border: none;
     cursor: pointer;
     transition: background 0.2s;
 }
-.btn-gold:hover { background: #9c6f3a; }
+.btn-gold:hover,
+a.btn-gold:hover { background: #9c6f3a; color: #ffffff !important; }
+a.btn-gold,
+a.btn-gold:link,
+a.btn-gold:visited,
+a.btn-gold:active { color: #ffffff !important; text-decoration: none !important; }
+
 .btn-outline {
     display: inline-block;
     padding: 0.9rem 2.2rem;
     background: transparent;
-    color: #1c1c1c;
+    color: #6b4718 !important;
     font-family: 'Jost', sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    text-decoration: none;
-    border: 2px solid rgba(28,28,28,0.75);
+    text-decoration: none !important;
+    border: 2px solid #9c6f3a;
     cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
 }
-.btn-outline:hover { border-color: #1c1c1c; background: rgba(28,28,28,0.05); }
+a.btn-outline,
+a.btn-outline:link,
+a.btn-outline:visited,
+a.btn-outline:active { color: #6b4718 !important; text-decoration: none !important; }
+.btn-outline:hover,
+a.btn-outline:hover {
+    border-color: #6b4718;
+    background: rgba(107,71,24,0.07);
+    color: #6b4718 !important;
+}
+
+/* ── Hero right panel (photo + stats) ── */
+.hero-right {
+    flex: 0 0 44%;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid rgba(26,26,26,0.08);
+}
+.hero-photo-wrap {
+    border-bottom: 1px solid rgba(26,26,26,0.08);
+    background: #f7f5f0;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.hero-photo {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    object-position: 50% 12%;
+    display: block;
+}
 
 /* ── Stats column (right of hero) ── */
 .stats-column {
     flex: 1;
-    border-left: 1px solid rgba(26,26,26,0.08);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 3rem 3.5rem;
+    padding: 2.5rem 3.5rem;
 }
 .stat-row {
     padding: 1.8rem 0;
@@ -506,22 +549,27 @@ st.markdown(f"""
     </div>
   </section>
 
-  <div class="stats-column">
-    <div class="stat-row">
-      <div class="stat-num">50<span>+</span></div>
-      <div class="stat-label">Research projects managed</div>
+  <div class="hero-right">
+    <div class="hero-photo-wrap">
+      <img src="data:image/png;base64,{photo_b64}" class="hero-photo" alt="Yaser Alhusaini">
     </div>
-    <div class="stat-row">
-      <div class="stat-num">30<span>+</span></div>
-      <div class="stat-label">Staff trained in data &amp; evaluation</div>
-    </div>
-    <div class="stat-row">
-      <div class="stat-num">3</div>
-      <div class="stat-label">Countries — United States · United Kingdom · Saudi Arabia</div>
-    </div>
-    <div class="stat-row">
-      <div class="stat-num">MPP</div>
-      <div class="stat-label">Georgetown McCourt School of Public Policy</div>
+    <div class="stats-column">
+      <div class="stat-row">
+        <div class="stat-num">50<span>+</span></div>
+        <div class="stat-label">Research projects managed</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-num">30<span>+</span></div>
+        <div class="stat-label">Staff trained in data &amp; evaluation</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Countries — United States · United Kingdom · Saudi Arabia</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-num">MPP</div>
+        <div class="stat-label">Georgetown McCourt School of Public Policy</div>
+      </div>
     </div>
   </div>
 </div>
@@ -975,7 +1023,8 @@ with st.container():
                        font=dict(size=17, color="#1c1c1c", family=FONT), x=0.01, y=0.97),
             xaxis=dict(**base_layout["xaxis"],
                        title=dict(text="Jobs Lost", font=dict(size=14, color=TICK)),
-                       tickformat=","),
+                       tickformat=",",
+                       range=[0, 72000]),
             height=520,
             showlegend=True,
             legend=dict(
@@ -989,7 +1038,7 @@ with st.container():
                 xanchor="left",
                 x=0.16,
             ),
-            margin=dict(l=200, r=60, t=130, b=60),
+            margin=dict(l=200, r=90, t=130, b=60),
         ))
         fig.update_layout(**layout)
         st.plotly_chart(fig, use_container_width=True)
@@ -1029,23 +1078,41 @@ with st.container():
             ), secondary_y=True)
 
         fig.add_hline(y=0, secondary_y=True,
-                      line=dict(color="rgba(28,28,28,0.25)", width=1, dash="dot"))
-        fig.add_annotation(x="Jul 25", y=10800,
-                           text="Listings peak +41% YoY",
-                           showarrow=True, arrowhead=0, arrowcolor=GOLD,
-                           font=dict(size=12, color=GOLD), ay=-50)
+                      line=dict(color="rgba(28,28,28,0.30)", width=1.5, dash="dot"))
+
+        # Annotation only makes sense when listings bars are visible
+        if metric in ["Both", "Listings only"]:
+            fig.add_annotation(x="Jul 25", y=10800,
+                               text="Listings peak +41% YoY",
+                               showarrow=True, arrowhead=2, arrowwidth=1.5,
+                               arrowcolor=GOLD,
+                               font=dict(size=12, color="#7a5520", family=FONT),
+                               ax=55, ay=-50,
+                               bgcolor="rgba(255,255,255,0.92)",
+                               bordercolor=GOLD, borderwidth=1, borderpad=5)
+
+        # Primary axis: show for listings, hide when price-change-only
+        if metric == "Price change only":
+            primary_yaxis = dict(visible=False, showgrid=False)
+        else:
+            primary_yaxis = dict(**base_layout["yaxis"],
+                                 title=dict(text="Active Listings",
+                                            font=dict(size=14, color=TICK)),
+                                 tickformat=",")
 
         layout = base_layout.copy()
         layout.update(dict(
             title=dict(text="DMV Housing: Listing Surge vs. Price Pressure — 2024 to 2026",
                        font=dict(size=17, color="#1c1c1c", family=FONT), x=0.01, y=0.97),
-            yaxis=dict(**base_layout["yaxis"],
-                       title=dict(text="Active Listings", font=dict(size=14, color=TICK)),
-                       tickformat=","),
+            yaxis=primary_yaxis,
             yaxis2=dict(
                 title=dict(text="Price Change YoY %", font=dict(size=14, color=TICK)),
-                ticksuffix="%", gridcolor="rgba(0,0,0,0)",
+                ticksuffix="%",
+                gridcolor=GRID,
                 tickfont=dict(size=13, color=TICK),
+                zeroline=True,
+                zerolinecolor="rgba(28,28,28,0.20)",
+                zerolinewidth=1,
             ),
             height=520,
             barmode="overlay",
