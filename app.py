@@ -675,6 +675,26 @@ a#takafu-work-card:hover::after {
 }
 .work-link { margin-top: 0.8rem; align-self: flex-start; }
 
+.work-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.6rem;
+    padding: 0.38rem 0.9rem;
+    background: rgba(156,111,58,0.08);
+    border: 1.5px solid #9c6f3a;
+    color: #6b4718 !important;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.76rem;
+    font-weight: 500;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    transition: background 0.2s, color 0.2s;
+}
+a#takafu-work-card:hover .work-pill {
+    background: #9c6f3a;
+    color: #f7f5f0 !important;
+}
 .work-placeholder {
     background: #f0ede6;
     display: flex;
@@ -1175,6 +1195,7 @@ st.markdown("""
         <span class="work-finding-label">Key finding</span>
         <span class="work-finding-text">46% economic opportunity gap between men and women across Saudi Arabia's private sector, measured across 7.8 million GOSI employees.</span>
       </div>
+      <div><span class="work-pill">Read case study →</span></div>
     </a>
     <div class="work-placeholder">More case studies coming soon</div>
   </div>
