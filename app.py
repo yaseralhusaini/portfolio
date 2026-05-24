@@ -24,6 +24,11 @@ def get_file_b64(filename):
 
 resume_b64 = get_file_b64("resume.pdf")
 photo_b64  = get_file_b64("photo_nobg.png")
+report_b64 = get_file_b64("takafu_report.pdf")
+
+# ── Page routing via session state (avoids Streamlit Cloud routing issues) ──
+if 'page' not in st.session_state:
+    st.session_state.page = 'home'
 
 st.markdown("""
 <style>
@@ -623,6 +628,58 @@ div[data-testid="stHorizontalBlock"] {
     text-transform: uppercase;
 }
 
+/* ── Streamlit buttons styled as btn-outline ── */
+div[data-testid="stButton"] > button {
+    background: transparent !important;
+    color: #6b4718 !important;
+    border: 2px solid #9c6f3a !important;
+    border-radius: 0 !important;
+    font-family: 'Jost', sans-serif !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    padding: 0.7rem 2rem !important;
+    box-shadow: none !important;
+    transition: border-color 0.2s, background 0.2s !important;
+}
+div[data-testid="stButton"] > button:hover,
+div[data-testid="stButton"] > button:focus {
+    border-color: #6b4718 !important;
+    background: rgba(107,71,24,0.07) !important;
+    color: #6b4718 !important;
+    box-shadow: none !important;
+}
+
+/* ── Case study page ── */
+.cs-header { padding: 4rem 4rem 3rem; border-bottom: 1px solid rgba(26,26,26,0.08); max-width: 960px; }
+.cs-overline { font-family:'DM Mono',monospace; font-size:0.82rem; letter-spacing:0.22em; text-transform:uppercase; color:#9c6f3a; margin-bottom:1.6rem; }
+.cs-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2.8rem,5vw,4.8rem); font-weight:300; line-height:1.05; color:#1c1c1c !important; margin-bottom:1.8rem; }
+.cs-line { width:60px; height:2px; background:#9c6f3a; margin-bottom:2rem; }
+.cs-meta-row { display:flex; gap:2.5rem; flex-wrap:wrap; }
+.cs-meta-item { display:flex; flex-direction:column; gap:0.3rem; }
+.cs-meta-label { font-family:'DM Mono',monospace; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(28,28,28,0.45); }
+.cs-meta-value { font-size:1rem; font-weight:300; color:rgba(28,28,28,0.80); }
+.cs-body { padding: 0 4rem; max-width: 960px; }
+.cs-section { padding:4rem 0; border-bottom:1px solid rgba(26,26,26,0.07); display:grid; grid-template-columns:180px 1fr; gap:3.5rem; }
+.cs-section:last-child { border-bottom:none; }
+.cs-section-label { font-family:'DM Mono',monospace; font-size:0.78rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(28,28,28,0.42); padding-top:0.35rem; line-height:1.6; }
+.cs-section-label span { display:block; font-size:1.6rem; font-family:'Cormorant Garamond',serif; color:rgba(28,28,28,0.12); letter-spacing:0; font-weight:300; margin-bottom:0.4rem; }
+.cs-content h3 { font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-weight:400; color:#1c1c1c !important; margin-bottom:1.2rem; line-height:1.2; }
+.cs-content p { font-size:1.15rem; font-weight:300; line-height:1.85; color:rgba(28,28,28,0.82); margin-bottom:1.2rem; }
+.cs-content p:last-child { margin-bottom:0; }
+.cs-bullets { list-style:none; padding:0; margin:0; }
+.cs-bullets li { font-size:1.15rem; font-weight:300; color:rgba(28,28,28,0.82); line-height:1.85; padding-left:1.4rem; position:relative; margin-bottom:0.9rem; }
+.cs-bullets li::before { content:'—'; position:absolute; left:0; color:#9c6f3a; }
+.cs-bullets li strong { font-weight:500; color:#1c1c1c; }
+.findings-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:rgba(26,26,26,0.08); border:1px solid rgba(26,26,26,0.08); margin-top:0.5rem; }
+.finding-card { background:#f7f5f0; padding:2rem 1.8rem; }
+.finding-num { font-family:'Cormorant Garamond',serif; font-size:2.6rem; font-weight:300; color:#9c6f3a; line-height:1; margin-bottom:0.5rem; }
+.finding-desc { font-size:1rem; font-weight:300; color:rgba(28,28,28,0.78); line-height:1.6; }
+.cs-callout { background:#ede9e0; border-top:2px solid #9c6f3a; padding:2rem 2.2rem; margin-top:0.5rem; }
+.cs-callout p { font-size:1.15rem; font-weight:300; line-height:1.85; color:rgba(28,28,28,0.82); margin:0; }
+.cs-btn-row { padding: 2.5rem 4rem; display:flex; gap:1.2rem; flex-wrap:wrap; align-items:center; border-top:1px solid rgba(26,26,26,0.07); }
+
 /* Featured service card (spans full row) */
 .skill-card-featured {
     background: #ede9e0;
@@ -638,6 +695,95 @@ div[data-testid="stHorizontalBlock"] {
 .skill-card-featured:hover { background: #e5e0d6; }
 </style>
 """, unsafe_allow_html=True)
+
+# ── Takafu case study (session-state routed) ───────────────────────────────────
+if st.session_state.page == 'takafu':
+    report_href = f'data:application/pdf;base64,{report_b64}' if report_b64 else '#'
+    st.markdown("""
+<nav class="nav-bar">
+  <div class="nav-name">Yaser Alhusaini</div>
+  <div class="nav-links"><span style="font-family:'DM Mono',monospace;font-size:0.82rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(28,28,28,0.45);">Case Study — Takafu</span></div>
+</nav>""", unsafe_allow_html=True)
+
+    if st.button("← Back to Portfolio", key="cs_back_top"):
+        st.session_state.page = 'home'
+        st.rerun()
+
+    st.markdown("""
+<div class="cs-header">
+  <div class="cs-overline">Case Study · 01</div>
+  <h1 class="cs-title">Takafu Equal<br>Opportunity Index</h1>
+  <div class="cs-line"></div>
+  <div class="cs-meta-row">
+    <div class="cs-meta-item"><span class="cs-meta-label">Client</span><span class="cs-meta-value">Alnahda Society · Alwathba Consultancy</span></div>
+    <div class="cs-meta-item"><span class="cs-meta-label">Geography</span><span class="cs-meta-value">Saudi Arabia</span></div>
+    <div class="cs-meta-item"><span class="cs-meta-label">Year</span><span class="cs-meta-value">2022</span></div>
+    <div class="cs-meta-item"><span class="cs-meta-label">Domain</span><span class="cs-meta-value">Gender Equity · Labor Economics · Policy Research</span></div>
+  </div>
+</div>
+
+<div class="cs-body">
+  <div class="cs-section">
+    <div class="cs-section-label"><span>01</span>Context</div>
+    <div class="cs-content">
+      <h3>Saudi Arabia's first private-sector gender parity index</h3>
+      <p>Alnahda Society — founded in 1962, Saudi Arabia's oldest and largest women's empowerment nonprofit — commissioned the Takafu Equal Opportunity Index as part of a broader push to create a measurable, evidence-based framework for tracking gender parity in the Kingdom's private sector.</p>
+      <p>The project arrived at a pivotal moment. Saudi Vision 2030 had set an ambitious target: raise women's labor force participation from 17% to 30% by the decade's end. Yet there was no systematic, data-driven benchmark against which companies or policymakers could assess progress. Takafu was designed to fill that gap — producing the first index of its kind in the Kingdom, with findings intended to inform both employer practice and national policy.</p>
+      <p>The index measured gender equality across three dimensions: economic opportunity (hiring and participation), career development (advancement and retention), and compensation equity — drawing on both national administrative data and primary survey research.</p>
+    </div>
+  </div>
+  <div class="cs-section">
+    <div class="cs-section-label"><span>02</span>My Role</div>
+    <div class="cs-content">
+      <h3>End-to-end quantitative research, from administrative data to published findings</h3>
+      <ul class="cs-bullets">
+        <li><strong>Administrative data analysis</strong> — Analyzed a national GOSI (General Organization for Social Insurance) dataset covering over 7.8 million private sector employees. Ran advanced regression models to measure gender gaps in labor force participation, career progression, and compensation across industries and firm sizes.</li>
+        <li><strong>Oaxaca-Blinder decomposition</strong> — Applied decomposition analysis to isolate the portion of the gender wage gap that could not be explained by observable factors such as education, tenure, industry, or firm size — a methodologically rigorous approach for quantifying structural discrimination in labor markets.</li>
+        <li><strong>Dual survey design and analysis</strong> — Co-designed two complementary survey instruments: one targeting HR managers (firm-level practices), one targeting employees (individual-level experience). Collected and analyzed responses from 57 companies and 985 Saudi workers across Riyadh, Makkah, and the Eastern Province.</li>
+        <li><strong>Policy synthesis</strong> — Synthesized quantitative findings and qualitative survey data into the published Takafu 2020 Executive Summary, with policy and employer recommendations cited by government stakeholders aligned to Saudi Vision 2030.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cs-section">
+    <div class="cs-section-label"><span>03</span>Key Findings</div>
+    <div class="cs-content">
+      <h3>Four numbers that tell the story</h3>
+      <div class="findings-grid">
+        <div class="finding-card"><div class="finding-num">46%</div><div class="finding-desc">Overall economic opportunity gap between men and women across Saudi Arabia's private sector — capturing disparities in hiring, advancement, and pay.</div></div>
+        <div class="finding-card"><div class="finding-num">7.8M</div><div class="finding-desc">Private sector employees in the GOSI administrative dataset analyzed — the most comprehensive labor market dataset available in the Kingdom.</div></div>
+        <div class="finding-card"><div class="finding-num">57</div><div class="finding-desc">Companies surveyed alongside 985 individual workers across Riyadh, Makkah, and the Eastern Province — providing firm-level and worker-level perspectives on workplace equity.</div></div>
+        <div class="finding-card"><div class="finding-num">∆</div><div class="finding-desc">Significant unexplained wage gap remained after controlling for education, industry, and firm size — pointing to structural barriers beyond human capital differences.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cs-section">
+    <div class="cs-section-label"><span>04</span>Relevance</div>
+    <div class="cs-content">
+      <h3>What this means for your project</h3>
+      <div class="cs-callout">
+        <p>Takafu represents the kind of work I bring to complex policy research engagements: the technical depth to handle large administrative datasets, the methodological precision to apply labor economics techniques like Oaxaca-Blinder decomposition, and the end-to-end capacity to move from survey design through published, decision-ready findings.</p>
+        <p style="margin-top:1rem;">For clients working on gender equity, workforce analytics, program evaluation, or any initiative that requires translating raw data into credible, actionable policy insight — I bring the same combination of analytical rigor and stakeholder-facing clarity that shaped this project.</p>
+      </div>
+    </div>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+    st.markdown(f"""
+<div class="cs-btn-row">
+  <a href="{report_href}" download="Takafu_Executive_Summary.pdf" class="btn-gold">Download Executive Summary (PDF)</a>
+</div>""", unsafe_allow_html=True)
+
+    if st.button("← Back to Portfolio", key="cs_back_bottom"):
+        st.session_state.page = 'home'
+        st.rerun()
+
+    st.markdown("""
+<footer class="site-footer">
+  <span class="footer-text">© 2025 Yaser Alhusaini — Policy · Data · Research</span>
+  <span class="footer-text">Case Study · Takafu Equal Opportunity Index · Saudi Arabia</span>
+</footer>""", unsafe_allow_html=True)
+    st.stop()
 
 # ── Resume b64 ─────────────────────────────────────────────────────────────────
 resume_href = f'data:application/pdf;base64,{resume_b64}' if resume_b64 else '#'
@@ -947,12 +1093,15 @@ st.markdown("""
         <span class="work-finding-label">Key finding</span>
         <span class="work-finding-text">46% economic opportunity gap between men and women across Saudi Arabia's private sector, measured across 7.8 million GOSI employees.</span>
       </div>
-      <a href="/takafu" target="_blank" class="btn-outline work-link">Read case study →</a>
     </div>
     <div class="work-placeholder">More case studies coming soon</div>
   </div>
 </section>
 """, unsafe_allow_html=True)
+
+if st.button("Read case study — Takafu Equal Opportunity Index →", key="open_takafu"):
+    st.session_state.page = 'takafu'
+    st.rerun()
 
 # ── Dashboard ──────────────────────────────────────────────────────────────────
 st.markdown('<div id="dashboard"></div>', unsafe_allow_html=True)
