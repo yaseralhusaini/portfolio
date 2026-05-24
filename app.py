@@ -355,22 +355,22 @@ a.btn-outline:hover {
 .btn-exp-cs {
     display: inline-block;
     margin-top: 1.4rem;
-    background: transparent;
-    color: #6b4718;
-    border: 2px solid #9c6f3a;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0.55rem 1.2rem;
-    text-decoration: none;
+    background: transparent !important;
+    color: #6b4718 !important;
+    border: 2px solid #9c6f3a !important;
+    font-family: 'Jost', sans-serif !important;
+    font-size: 0.78rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    padding: 0.55rem 1.2rem !important;
+    text-decoration: none !important;
     transition: background 0.2s, color 0.2s;
     white-space: nowrap;
 }
 .btn-exp-cs:hover {
-    background: #9c6f3a;
-    color: #f7f5f0;
+    background: #9c6f3a !important;
+    color: #f7f5f0 !important;
 }
 
 /* ── Skills grid ── */
@@ -604,8 +604,8 @@ div[data-testid="stHorizontalBlock"] {
 }
 .work-card:hover { background: #efece5; }
 a#takafu-work-card {
-    text-decoration: none;
-    color: inherit;
+    text-decoration: none !important;
+    color: inherit !important;
     cursor: pointer;
     position: relative;
     border-top: 3px solid transparent;
@@ -981,7 +981,7 @@ st.markdown("""
     <div>
       <div class="exp-date">Feb 2022 — Aug 2022</div>
       <div class="exp-org">Alnahda Society / Alwathba Consultancy</div>
-      <a href="?page=takafu" class="btn-exp-cs">Read case study →</a>
+      <a href="?page=takafu" target="_self" class="btn-exp-cs">Read case study →</a>
     </div>
     <div>
       <div class="exp-title">Research Analyst — Takafu Equal Opportunity Index</div>
@@ -1167,7 +1167,7 @@ st.markdown("""
     <span class="section-title">Selected Work</span>
   </div>
   <div class="work-grid">
-    <a href="?page=takafu" class="work-card" id="takafu-work-card">
+    <a href="?page=takafu" target="_self" class="work-card" id="takafu-work-card">
       <div class="work-overline">01 · Gender Equity Research</div>
       <div class="work-title">Takafu Equal Opportunity Index</div>
       <div class="work-meta">Gender Parity Index &nbsp;·&nbsp; Saudi Arabia &nbsp;·&nbsp; 2022</div>
