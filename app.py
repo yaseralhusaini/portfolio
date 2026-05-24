@@ -84,7 +84,7 @@ h1, h2, h3, h4, h5, h6 { color: #1c1c1c !important; }
     animation: fadeUp 0.9s ease 0.15s both;
 }
 .hero-content {
-    padding: 5rem 4rem 4rem;
+    padding: 3.5rem 4rem 3rem;
     flex: 0 0 56%;
 }
 .hero-overline {
@@ -200,7 +200,29 @@ a.btn-outline:hover {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 2.5rem 3.5rem;
+    padding: 2rem 3rem;
+}
+
+/* ── MPP credential under hero buttons ── */
+.hero-mpp {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(26,26,26,0.08);
+}
+.hero-mpp .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: #1c1c1c;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+}
+.hero-mpp .stat-label {
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(28,28,28,0.65);
+    line-height: 1.5;
 }
 .stat-row {
     padding: 1.8rem 0;
@@ -226,7 +248,7 @@ a.btn-outline:hover {
 
 /* ── Section base ── */
 .section {
-    padding: 5.5rem 4rem;
+    padding: 4rem 4rem;
     border-bottom: 1px solid rgba(26,26,26,0.06);
 }
 .section-header {
@@ -544,6 +566,10 @@ st.markdown(f"""
       <a href="{resume_href}" download="Yaser_Alhusaini_Resume.pdf" class="btn-outline">Download Resume</a>
       <a href="https://www.linkedin.com/in/yaser-alhusaini-43330b281/" target="_blank" class="btn-outline">LinkedIn</a>
     </div>
+    <div class="hero-mpp">
+      <div class="stat-num">MPP</div>
+      <div class="stat-label">Georgetown McCourt School of Public Policy</div>
+    </div>
   </section>
 
   <div class="hero-right">
@@ -562,10 +588,6 @@ st.markdown(f"""
       <div class="stat-row">
         <div class="stat-num">3</div>
         <div class="stat-label">Countries — United States · United Kingdom · Saudi Arabia</div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-num">MPP</div>
-        <div class="stat-label">Georgetown McCourt School of Public Policy</div>
       </div>
     </div>
   </div>
@@ -966,6 +988,7 @@ with st.container():
             yaxis=dict(**base_layout["yaxis"], ticksuffix="%",
                        title=dict(text="Unemployment Rate", font=dict(size=14, color=TICK))),
             height=520,
+            margin=dict(l=60, r=90, t=110, b=60),
         ))
         fig.update_layout(**layout)
         st.plotly_chart(fig, use_container_width=True)
