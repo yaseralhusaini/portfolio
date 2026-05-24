@@ -888,8 +888,26 @@ div[data-testid="stButton"] > button:focus {
   .findings-grid { grid-template-columns: 1fr !important; }
 
   /* Contact */
+  .contact-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
   .contact-headline { font-size: clamp(2rem, 8vw, 3rem) !important; }
   .contact-sub { font-size: 1.05rem !important; }
+  .contact-cta-row { flex-direction: column !important; }
+  .contact-cta-row a { width: 100% !important; text-align: center !important; }
+
+  /* Dashboard controls — stack columns vertically on mobile */
+  div[data-testid="stHorizontalBlock"] {
+    flex-wrap: wrap !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+  div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"] {
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* Prevent any element from causing horizontal scroll */
+  body, .stApp, .block-container { overflow-x: hidden !important; }
 
   /* Footer */
   .site-footer {
