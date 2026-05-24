@@ -8,7 +8,7 @@ st.set_page_config(
     page_title="Yaser Alhusaini | Policy & Data Operations Portfolio",
     page_icon="📊",
     layout="wide",
-    initial_sidebar_state="collapsed" # Hides the sidebar completely by default
+    initial_sidebar_state="collapsed" # Hides the default sidebar layout
 )
 
 # Premium Global CSS Injection for Animations and Clean Layouts
@@ -30,17 +30,18 @@ st.markdown("""
             padding: 15px;
             border-radius: 6px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 10px;
         }
         /* Hide default Streamlit decoration elements */
         #MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
     </style>
-""", unsafe_transform=True)
+""", unsafe_allow_html=True)
 
 # ==========================================
 # 2. TOP HORIZONTAL NAVIGATION BAR
 # ==========================================
-st.markdown('<div class="fade-in">', unsafe_transform=True)
+st.markdown('<div class="fade-in">', unsafe_allow_html=True)
 
 # Title Header Banner
 title_col, contact_col = st.columns([2, 1])
@@ -53,7 +54,7 @@ with contact_col:
         📍 Maryland, MD &nbsp;|&nbsp; ✉️ <a href="mailto:alhusaini.yaser@gmail.com">alhusaini.yaser@gmail.com</a><br>
         <a href="https://linkedin.com" target="_blank">LinkedIn</a> &nbsp;•&nbsp; <a href="https://github.com" target="_blank">GitHub</a>
     </div>
-    """, unsafe_transform=True)
+    """, unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -73,7 +74,7 @@ with nav_col3:
     if st.button("💼 Full Experience", use_container_width=True):
         st.session_state.current_page = "💼 Full Experience"
 
-st.markdown("<br>", unsafe_transform=True)
+st.markdown("<br>", unsafe_allow_html=True)
 
 # ==========================================
 # PAGE VIEW CONFIGURATIONS
@@ -81,7 +82,7 @@ st.markdown("<br>", unsafe_transform=True)
 
 # --- PAGE: HOME & OVERVIEW ---
 if st.session_state.current_page == "🏠 Profile Overview":
-    st.markdown('<div class="fade-in">', unsafe_transform=True)
+    st.markdown('<div class="fade-in">', unsafe_allow_html=True)
     
     st.subheader("Executive Summary")
     st.markdown("""
@@ -90,7 +91,7 @@ if st.session_state.current_page == "🏠 Profile Overview":
     improve internal systems, and translate messy data into clear, executive-ready insights.
     """)
     
-    st.markdown("<br>", unsafe_transform=True)
+    st.markdown("<br>", unsafe_allow_html=True)
     
     st.header("🎯 Core Capabilities")
     col1, col2 = st.columns(2)
@@ -105,7 +106,7 @@ if st.session_state.current_page == "🏠 Profile Overview":
                 <li><b>Strategic Reporting:</b> Drafting comprehensive policy briefs, compliance matrices, and research syntheses for leadership.</li>
             </ul>
         </div>
-        """, unsafe_transform=True)
+        """, unsafe_allow_html=True)
         
     with col2:
         st.markdown("""
@@ -117,15 +118,15 @@ if st.session_state.current_page == "🏠 Profile Overview":
                 <li><b>Capacity Building:</b> Training, upskilling, and supporting staff members on technical visualization and performance metrics.</li>
             </ul>
         </div>
-        """, unsafe_transform=True)
+        """, unsafe_allow_html=True)
         
-    st.markdown("<br><br>", unsafe_transform=True)
+    st.markdown("<br><br>", unsafe_allow_html=True)
     st.info("💡 **Interactive Element Live:** Click on **'📈 Interactive Simulator'** in the top navigation bar to test a dynamic data simulation tool built natively from scratch.")
     st.markdown('</div>', unsafe_transform=True)
 
 # --- PAGE: INTERACTIVE SIMULATION DASHBOARD ---
 elif st.session_state.current_page == "📈 Interactive Simulator":
-    st.markdown('<div class="fade-in">', unsafe_transform=True)
+    st.markdown('<div class="fade-in">', unsafe_allow_html=True)
     
     st.subheader("📊 DC Metro Youth Workforce Initiative Simulator")
     st.markdown("""
@@ -152,7 +153,7 @@ elif st.session_state.current_page == "📈 Interactive Simulator":
         triggers mathematical operational constraints on retention curves, while optimal staffing density 
         exponentially compounds successful long-term job placements.
         </small>
-        """, unsafe_transform=True)
+        """, unsafe_allow_html=True)
 
     # Backend Algorithmic Calculations
     base_funding_per_capita = 2500  
@@ -170,13 +171,13 @@ elif st.session_state.current_page == "📈 Interactive Simulator":
         # Mini KPI Highlight grid
         m1, m2, m3 = st.columns(3)
         with m1:
-            st.markdown(f'<div class="metric-card"><strong>Completion Rate</strong><br><span style="font-size:22px; color:#1f77b4; font-weight:bold;">{completion_rate*100:.1f}%</span></div>', unsafe_transform=True)
+            st.markdown(f'<div class="metric-card"><strong>Completion Rate</strong><br><span style="font-size:22px; color:#1f77b4; font-weight:bold;">{completion_rate*100:.1f}%</span></div>', unsafe_allow_html=True)
         with m2:
-            st.markdown(f'<div class="metric-card"><strong>Placement Rate</strong><br><span style="font-size:22px; color:#ff7f0e; font-weight:bold;">{placement_rate*100:.1f}%</span></div>', unsafe_transform=True)
+            st.markdown(f'<div class="metric-card"><strong>Placement Rate</strong><br><span style="font-size:22px; color:#ff7f0e; font-weight:bold;">{placement_rate*100:.1f}%</span></div>', unsafe_allow_html=True)
         with m3:
-            st.markdown(f'<div class="metric-card"><strong>Total Jobs Secured</strong><br><span style="font-size:22px; color:#2ca02c; font-weight:bold;">{total_placed} / {baseline_participants}</span></div>', unsafe_transform=True)
+            st.markdown(f'<div class="metric-card"><strong>Total Jobs Secured</strong><br><span style="font-size:22px; color:#2ca02c; font-weight:bold;">{total_placed} / {baseline_participants}</span></div>', unsafe_allow_html=True)
             
-        st.markdown("<br>", unsafe_transform=True)
+        st.markdown("<br>", unsafe_allow_html=True)
         
         # Build Smooth Cumulative Pipeline Arrays
         months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -212,11 +213,11 @@ elif st.session_state.current_page == "📈 Interactive Simulator":
         
         st.plotly_chart(fig, use_container_width=True)
         
-    st.markdown('</div>', unsafe_transform=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # --- PAGE: FULL EXPERIENCE (RESUME VIEW) ---
 elif st.session_state.current_page == "💼 Full Experience":
-    st.markdown('<div class="fade-in">', unsafe_transform=True)
+    st.markdown('<div class="fade-in">', unsafe_allow_html=True)
     
     st.subheader("💼 Professional Background & Academic History")
     
@@ -240,22 +241,26 @@ elif st.session_state.current_page == "💼 Full Experience":
         
         st.markdown("""
         **Employment & Education Specialist** | SAMU First Response  
-        *January 2026 – Present | Washington, DC* * Provide structured employment and education coaching to transition DC youth experiencing homelessness into high-readiness pathways.
+        *January 2026 – Present | Washington, DC*
+        * Provide structured employment and education coaching to transition DC youth experiencing homelessness into high-readiness pathways.
         * Maintain direct mentoring relationships, auditing technical trade school options and higher education configurations.
         
         **Senior Policy Associate** | WE Strategies  
-        *April 2024 – April 2025 | Washington, DC* * Managed analytical data frameworks and operational pipelines supporting regional workforce initiatives.
+        *April 2024 – April 2025 | Washington, DC*
+        * Managed analytical data frameworks and operational pipelines supporting regional workforce initiatives.
         * Spearheaded cross-agency execution and outcome reporting matrices for key entities including **DOES** and **OSSE**.
         * Led technical capacity training for 10+ core staff members focusing on dashboard transparency and metric reporting.
         
         **Data Analysis Intern** | The World Bank  
-        *September – December 2019 | Washington, DC* * Evaluated complex international business data environments under the *Doing Business 2020* global regulatory benchmarking framework.
+        *September – December 2019 | Washington, DC*
+        * Evaluated complex international business data environments under the *Doing Business 2020* global regulatory benchmarking framework.
         
         **Policy Fellow** | Harvard Kennedy School  
-        *October 2016 – July 2018 | Riyadh, Saudi Arabia* * Governed multi-method field evaluation operations spanning more than 20 national labor and education portfolios.
+        *October 2016 – July 2018 | Riyadh, Saudi Arabia*
+        * Governed multi-method field evaluation operations spanning more than 20 national labor and education portfolios.
         * Interfaced directly with ministerial leadership teams to align monitoring matrices and deployment benchmarks.
         """)
         
-    st.markdown('</div>', unsafe_transform=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
-st.markdown('</div>', unsafe_transform=True)
+st.markdown('</div>', unsafe_allow_html=True)
