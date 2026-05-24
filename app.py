@@ -610,33 +610,6 @@ div[data-testid="stHorizontalBlock"] {
 }
 .work-link { margin-top: 0.8rem; align-self: flex-start; }
 
-/* ── Style st.page_link as btn-outline, positioned inside the work card ── */
-div[data-testid="stPageLink"] {
-    padding-left: 6.5rem !important;
-    margin-top: -2.8rem !important;
-    padding-bottom: 3rem !important;
-}
-[data-testid="stPageLink-NavLink"] {
-    display: inline-block !important;
-    padding: 0.9rem 2.2rem !important;
-    background: transparent !important;
-    color: #6b4718 !important;
-    font-family: 'Jost', sans-serif !important;
-    font-size: 0.9rem !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.14em !important;
-    text-transform: uppercase !important;
-    text-decoration: none !important;
-    border: 2px solid #9c6f3a !important;
-    transition: border-color 0.2s, background 0.2s !important;
-}
-[data-testid="stPageLink-NavLink"]:hover {
-    border-color: #6b4718 !important;
-    background: rgba(107,71,24,0.07) !important;
-    color: #6b4718 !important;
-}
-[data-testid="stPageLink-NavLink"] svg,
-[data-testid="stPageLink-NavLink"] img { display: none !important; }
 .work-placeholder {
     background: #f0ede6;
     display: flex;
@@ -974,13 +947,12 @@ st.markdown("""
         <span class="work-finding-label">Key finding</span>
         <span class="work-finding-text">46% economic opportunity gap between men and women across Saudi Arabia's private sector, measured across 7.8 million GOSI employees.</span>
       </div>
+      <a href="/takafu" target="_blank" class="btn-outline work-link">Read case study →</a>
     </div>
     <div class="work-placeholder">More case studies coming soon</div>
   </div>
 </section>
 """, unsafe_allow_html=True)
-
-st.page_link("pages/takafu.py", label="Read case study →")
 
 # ── Dashboard ──────────────────────────────────────────────────────────────────
 st.markdown('<div id="dashboard"></div>', unsafe_allow_html=True)
