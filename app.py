@@ -609,6 +609,34 @@ div[data-testid="stHorizontalBlock"] {
     line-height: 1.55;
 }
 .work-link { margin-top: 0.8rem; align-self: flex-start; }
+
+/* ── Style st.page_link as btn-outline, positioned inside the work card ── */
+div[data-testid="stPageLink"] {
+    padding-left: 6.5rem !important;
+    margin-top: -2.8rem !important;
+    padding-bottom: 3rem !important;
+}
+[data-testid="stPageLink-NavLink"] {
+    display: inline-block !important;
+    padding: 0.9rem 2.2rem !important;
+    background: transparent !important;
+    color: #6b4718 !important;
+    font-family: 'Jost', sans-serif !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    border: 2px solid #9c6f3a !important;
+    transition: border-color 0.2s, background 0.2s !important;
+}
+[data-testid="stPageLink-NavLink"]:hover {
+    border-color: #6b4718 !important;
+    background: rgba(107,71,24,0.07) !important;
+    color: #6b4718 !important;
+}
+[data-testid="stPageLink-NavLink"] svg,
+[data-testid="stPageLink-NavLink"] img { display: none !important; }
 .work-placeholder {
     background: #f0ede6;
     display: flex;
@@ -940,7 +968,7 @@ st.markdown("""
   <div class="work-grid">
     <div class="work-card">
       <div class="work-overline">01 · Gender Equity Research</div>
-      <h3 class="work-title">Takafu Equal Opportunity Index</h3>
+      <div class="work-title">Takafu Equal Opportunity Index</div>
       <div class="work-meta">Gender Parity Index &nbsp;·&nbsp; Saudi Arabia &nbsp;·&nbsp; 2022</div>
       <div class="work-finding">
         <span class="work-finding-label">Key finding</span>
@@ -952,12 +980,7 @@ st.markdown("""
 </section>
 """, unsafe_allow_html=True)
 
-# Streamlit page link fallback
-st.markdown("""
-<div style="margin: -5.8rem 0 4rem 6.5rem; position: relative; z-index: 5; width: fit-content;">
-  <a href="/takafu" target="_self" class="btn-outline work-link">Read case study →</a>
-</div>
-""", unsafe_allow_html=True)
+st.page_link("pages/takafu.py", label="Read case study →")
 
 # ── Dashboard ──────────────────────────────────────────────────────────────────
 st.markdown('<div id="dashboard"></div>', unsafe_allow_html=True)
