@@ -894,11 +894,13 @@ div[data-testid="stButton"] > button:focus {
   .contact-cta-row { flex-direction: column !important; }
   .contact-cta-row a { width: 100% !important; text-align: center !important; }
 
-  /* Dashboard — hide charts and controls on mobile */
+  /* Dashboard — hide charts, controls and sourcing on mobile */
   div[data-testid="stPlotlyChart"] { display: none !important; }
   div[data-testid="stHorizontalBlock"] { display: none !important; }
+  div[data-testid="stColumn"] { display: none !important; }
   .dash-desktop-only { display: none !important; }
   .dash-mobile-note { display: block !important; }
+  .section-dashboard { padding-bottom: 2rem !important; }
 
   /* Prevent any element from causing horizontal scroll */
   body, .stApp, .block-container { overflow-x: hidden !important; }
@@ -1497,7 +1499,7 @@ st.markdown("""
 # ── Dashboard ──────────────────────────────────────────────────────────────────
 st.markdown('<div id="dashboard"></div>', unsafe_allow_html=True)
 st.markdown("""
-<section class="section">
+<section class="section section-dashboard">
   <div class="section-header">
     <span class="section-num">05</span>
     <span class="section-title">DMV Federal Workforce Impact — Interactive Dashboard</span>
@@ -1677,7 +1679,7 @@ with st.container():
         ))
         fig.update_layout(**layout)
         st.plotly_chart(fig, use_container_width=True)
-        st.markdown('<p style="font-size:0.78rem;color:rgba(28,28,28,0.45);font-family:\'DM Mono\',monospace;letter-spacing:0.05em;padding:0 3.5rem 0.5rem;">Source: Bureau of Labor Statistics, Local Area Unemployment Statistics (LAUS), 2024–2026.</p>', unsafe_allow_html=True)
+        st.markdown('<div class="dash-desktop-only"><p style="font-size:0.78rem;color:rgba(28,28,28,0.45);font-family:\'DM Mono\',monospace;letter-spacing:0.05em;padding:0 3.5rem 0.5rem;">Source: Bureau of Labor Statistics, Local Area Unemployment Statistics (LAUS), 2024–2026.</p></div>', unsafe_allow_html=True)
 
     # ── Panel 2: Sector Job Losses ───────────────────────────────────────────
     elif panel == "Sector Job Losses":
@@ -1748,7 +1750,7 @@ with st.container():
         ))
         fig.update_layout(**layout)
         st.plotly_chart(fig, use_container_width=True)
-        st.markdown('<p style="font-size:0.78rem;color:rgba(28,28,28,0.45);font-family:\'DM Mono\',monospace;letter-spacing:0.05em;padding:0 3.5rem 0.5rem;">Source: BLS Quarterly Census of Employment and Wages (QCEW); Moody\'s Analytics regional estimates, 2025.</p>', unsafe_allow_html=True)
+        st.markdown('<div class="dash-desktop-only"><p style="font-size:0.78rem;color:rgba(28,28,28,0.45);font-family:\'DM Mono\',monospace;letter-spacing:0.05em;padding:0 3.5rem 0.5rem;">Source: BLS Quarterly Census of Employment and Wages (QCEW); Moody\'s Analytics regional estimates, 2025.</p></div>', unsafe_allow_html=True)
 
     # ── Panel 3: Housing Squeeze ─────────────────────────────────────────────
     elif panel == "Housing Squeeze":
@@ -1830,7 +1832,7 @@ with st.container():
         ))
         fig.update_layout(**layout)
         st.plotly_chart(fig, use_container_width=True)
-        st.markdown('<p style="font-size:0.78rem;color:rgba(28,28,28,0.45);font-family:\'DM Mono\',monospace;letter-spacing:0.05em;padding:0 3.5rem 0.5rem;">Source: Realtor.com Market Reports; Zillow Research; DC Office of Planning (DMPED), 2024–2026.</p>', unsafe_allow_html=True)
+        st.markdown('<div class="dash-desktop-only"><p style="font-size:0.78rem;color:rgba(28,28,28,0.45);font-family:\'DM Mono\',monospace;letter-spacing:0.05em;padding:0 3.5rem 0.5rem;">Source: Realtor.com Market Reports; Zillow Research; DC Office of Planning (DMPED), 2024–2026.</p></div>', unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
 
