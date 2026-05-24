@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
@@ -698,6 +699,7 @@ div[data-testid="stButton"] > button:focus {
 
 # ── Takafu case study (session-state routed) ───────────────────────────────────
 if st.session_state.page == 'takafu':
+    components.html("<script>window.parent.scrollTo(0, 0);</script>", height=0)
     report_href = f'data:application/pdf;base64,{report_b64}' if report_b64 else '#'
     st.markdown("""
 <nav class="nav-bar">
@@ -857,7 +859,7 @@ st.markdown(f"""
 # ── Experience ─────────────────────────────────────────────────────────────────
 st.markdown('<div id="experience"></div>', unsafe_allow_html=True)
 st.markdown("""
-<section class="section">
+<div class="section" style="padding-bottom:0;border-bottom:none;">
   <div class="section-header">
     <span class="section-num">01</span>
     <span class="section-title">Experience</span>
@@ -900,7 +902,7 @@ st.markdown("""
     </div>
   </div>
 
-  <div class="exp-item">
+  <div class="exp-item" style="border-bottom:none;">
     <div>
       <div class="exp-date">Feb 2022 — Aug 2022</div>
       <div class="exp-org">Alnahda Society / Alwathba Consultancy</div>
@@ -917,7 +919,18 @@ st.markdown("""
       </ul>
     </div>
   </div>
+</div>
+""", unsafe_allow_html=True)
 
+# Button under Alnahda — indented to align with the exp-item content column
+_, _alnahda_btn_col = st.columns([1, 4])
+with _alnahda_btn_col:
+    if st.button("Read Takafu case study →", key="alnahda_takafu"):
+        st.session_state.page = 'takafu'
+        st.rerun()
+
+st.markdown("""
+<div class="section" style="padding-top:2rem;">
   <div class="exp-item">
     <div>
       <div class="exp-date">Oct 2016 — Jul 2018</div>
@@ -1099,9 +1112,11 @@ st.markdown("""
 </section>
 """, unsafe_allow_html=True)
 
-if st.button("Read case study — Takafu Equal Opportunity Index →", key="open_takafu"):
-    st.session_state.page = 'takafu'
-    st.rerun()
+_cs_col, _ = st.columns([1, 1])
+with _cs_col:
+    if st.button("Read case study →", key="open_takafu"):
+        st.session_state.page = 'takafu'
+        st.rerun()
 
 # ── Dashboard ──────────────────────────────────────────────────────────────────
 st.markdown('<div id="dashboard"></div>', unsafe_allow_html=True)
