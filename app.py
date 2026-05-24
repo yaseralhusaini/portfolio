@@ -31,6 +31,13 @@ report_b64 = get_file_b64("takafu_report.pdf")
 if 'page' not in st.session_state:
     st.session_state.page = 'home'
 
+# Allow HTML links like <a href="?page=takafu"> to trigger navigation
+_qp = st.query_params
+if _qp.get("page") == "takafu":
+    st.session_state.page = 'takafu'
+    st.query_params.clear()
+    st.rerun()
+
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap');
@@ -574,18 +581,23 @@ div[data-testid="stHorizontalBlock"] {
     transition: background 0.2s, box-shadow 0.2s;
 }
 .work-card:hover { background: #efece5; }
-#takafu-work-card {
+a#takafu-work-card {
+    text-decoration: none;
+    color: inherit;
     cursor: pointer;
     position: relative;
     border-top: 3px solid transparent;
     transition: background 0.2s, border-top-color 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
 }
-#takafu-work-card:hover {
+a#takafu-work-card:hover {
     background: #efece5;
     border-top-color: #9c6f3a;
     box-shadow: 0 4px 20px rgba(156,111,58,0.10);
 }
-#takafu-work-card::after {
+a#takafu-work-card::after {
     content: '→';
     position: absolute;
     bottom: 1.5rem;
@@ -595,7 +607,7 @@ div[data-testid="stHorizontalBlock"] {
     color: rgba(156,111,58,0.45);
     transition: color 0.2s, transform 0.2s;
 }
-#takafu-work-card:hover::after {
+a#takafu-work-card:hover::after {
     color: #9c6f3a;
     transform: translateX(4px);
 }
@@ -1139,7 +1151,7 @@ st.markdown("""
     <span class="section-title">Selected Work</span>
   </div>
   <div class="work-grid">
-    <div class="work-card" id="takafu-work-card">
+    <a href="?page=takafu" class="work-card" id="takafu-work-card">
       <div class="work-overline">01 · Gender Equity Research</div>
       <div class="work-title">Takafu Equal Opportunity Index</div>
       <div class="work-meta">Gender Parity Index &nbsp;·&nbsp; Saudi Arabia &nbsp;·&nbsp; 2022</div>
@@ -1147,36 +1159,12 @@ st.markdown("""
         <span class="work-finding-label">Key finding</span>
         <span class="work-finding-text">46% economic opportunity gap between men and women across Saudi Arabia's private sector, measured across 7.8 million GOSI employees.</span>
       </div>
-    </div>
+    </a>
     <div class="work-placeholder">More case studies coming soon</div>
   </div>
 </section>
 """, unsafe_allow_html=True)
 
-# Hidden button — card click triggers this via JS below
-if st.button("open_takafu_hidden", key="open_takafu"):
-    st.session_state.page = 'takafu'
-    st.rerun()
-
-components.html("""<script>
-(function() {
-    function init() {
-        var doc = window.parent.document;
-        var card = doc.getElementById('takafu-work-card');
-        var btn  = Array.from(doc.querySelectorAll('button'))
-                        .find(function(b) { return b.innerText.trim() === 'open_takafu_hidden'; });
-        if (!card || !btn) { setTimeout(init, 200); return; }
-
-        // Hide the button wrapper entirely
-        var wrap = btn.closest('[data-testid="stButton"]') || btn.parentElement;
-        if (wrap) wrap.style.display = 'none';
-
-        // Wire card click → button click
-        card.addEventListener('click', function() { btn.click(); });
-    }
-    setTimeout(init, 400);
-})();
-</script>""", height=1)
 
 # ── Dashboard ──────────────────────────────────────────────────────────────────
 st.markdown('<div id="dashboard"></div>', unsafe_allow_html=True)
