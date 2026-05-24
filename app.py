@@ -34,6 +34,11 @@ html, body, [class*="css"] {
 .block-container { padding: 0 !important; max-width: 100% !important; }
 section[data-testid="stSidebar"] { display: none; }
 
+/* Force all headings dark — overrides Streamlit theme */
+h1, h2, h3, h4, h5, h6 { color: #1c1c1c !important; }
+.hero-title em { color: #9c6f3a !important; }
+.contact-headline em { color: #9c6f3a !important; }
+
 /* ── Nav ── */
 .nav-bar {
     display: flex;
@@ -50,14 +55,14 @@ section[data-testid="stSidebar"] { display: none; }
 }
 .nav-name {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.35rem;
+    font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     color: #1c1c1c;
 }
 .nav-links { display: flex; gap: 2.5rem; }
 .nav-links a {
-    font-size: 0.82rem;
+    font-size: 0.93rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: rgba(28,28,28,0.65);
@@ -79,7 +84,7 @@ section[data-testid="stSidebar"] { display: none; }
 }
 .hero-overline {
     font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.92rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: #9c6f3a;
@@ -91,10 +96,9 @@ section[data-testid="stSidebar"] { display: none; }
     font-weight: 300;
     line-height: 0.95;
     letter-spacing: -0.02em;
-    color: #1c1c1c;
+    color: #1c1c1c !important;
     margin-bottom: 2rem;
 }
-.hero-title em { font-style: italic; color: #9c6f3a; }
 .hero-line {
     width: 60px;
     height: 2px;
@@ -103,21 +107,26 @@ section[data-testid="stSidebar"] { display: none; }
     animation: expandWidth 1s ease 0.8s both;
 }
 .hero-desc {
-    font-size: 1.08rem;
+    font-size: 1.22rem;
     font-weight: 300;
     line-height: 1.85;
     color: rgba(28,28,28,0.80);
     max-width: 580px;
-    margin-bottom: 3.8rem;
+    margin-bottom: 0;
 }
-.hero-cta-row { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+.hero-cta-row {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    margin-top: 3.5rem;
+}
 .btn-gold {
     display: inline-block;
-    padding: 0.8rem 2rem;
+    padding: 0.9rem 2.2rem;
     background: #9c6f3a;
     color: #f7f5f0;
     font-family: 'Jost', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -129,11 +138,11 @@ section[data-testid="stSidebar"] { display: none; }
 .btn-gold:hover { background: #b5833f; }
 .btn-outline {
     display: inline-block;
-    padding: 0.8rem 2rem;
+    padding: 0.9rem 2.2rem;
     background: transparent;
     color: #1c1c1c;
     font-family: 'Jost', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 400;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -168,7 +177,7 @@ section[data-testid="stSidebar"] { display: none; }
 }
 .stat-num span { color: #9c6f3a; }
 .stat-label {
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: rgba(28,28,28,0.65);
@@ -190,13 +199,13 @@ section[data-testid="stSidebar"] { display: none; }
 }
 .section-num {
     font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.88rem;
     color: #9c6f3a;
     letter-spacing: 0.15em;
 }
 .section-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
+    font-size: 2.6rem;
     font-weight: 300;
     color: #1c1c1c;
 }
@@ -212,14 +221,14 @@ section[data-testid="stSidebar"] { display: none; }
 .exp-item:last-child { border-bottom: none; }
 .exp-date {
     font-family: 'DM Mono', monospace;
-    font-size: 0.73rem;
+    font-size: 0.87rem;
     color: #9c6f3a;
     letter-spacing: 0.08em;
     margin-bottom: 0.5rem;
     line-height: 1.6;
 }
 .exp-org {
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     color: rgba(28,28,28,0.60);
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -227,21 +236,21 @@ section[data-testid="stSidebar"] { display: none; }
 }
 .exp-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 400;
     color: #1c1c1c;
     margin-bottom: 0.4rem;
     line-height: 1.2;
 }
 .exp-loc {
-    font-size: 0.8rem;
+    font-size: 0.93rem;
     color: rgba(28,28,28,0.55);
     letter-spacing: 0.06em;
     margin-bottom: 1.2rem;
 }
 .exp-bullets { list-style: none; padding: 0; }
 .exp-bullets li {
-    font-size: 0.95rem;
+    font-size: 1.08rem;
     font-weight: 300;
     color: rgba(28,28,28,0.82);
     line-height: 1.8;
@@ -272,14 +281,14 @@ section[data-testid="stSidebar"] { display: none; }
 .skill-card:hover { background: #efece5; }
 .skill-cat {
     font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #9c6f3a;
     margin-bottom: 1rem;
 }
 .skill-items {
-    font-size: 0.95rem;
+    font-size: 1.08rem;
     font-weight: 300;
     color: rgba(28,28,28,0.80);
     line-height: 2;
@@ -360,19 +369,24 @@ section[data-testid="stSidebar"] { display: none; }
 }
 .contact-headline {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 3rem;
+    font-size: 3.4rem;
     font-weight: 300;
     line-height: 1.1;
-    color: #1c1c1c;
+    color: #1c1c1c !important;
     margin-bottom: 1.5rem;
 }
-.contact-headline em { font-style: italic; color: #9c6f3a; }
 .contact-sub {
-    font-size: 0.98rem;
+    font-size: 1.12rem;
     font-weight: 300;
     line-height: 1.85;
     color: rgba(28,28,28,0.72);
-    margin-bottom: 3.5rem;
+    margin-bottom: 0;
+}
+.contact-cta-row {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    margin-top: 3.5rem;
 }
 .contact-item {
     display: flex;
@@ -380,16 +394,16 @@ section[data-testid="stSidebar"] { display: none; }
     gap: 1rem;
     padding: 1.2rem 0;
     border-top: 1px solid rgba(26,26,26,0.07);
-    font-size: 0.95rem;
+    font-size: 1.08rem;
     font-weight: 300;
     color: rgba(28,28,28,0.85);
 }
 .contact-icon {
     font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
+    font-size: 0.85rem;
     color: #9c6f3a;
     letter-spacing: 0.1em;
-    min-width: 70px;
+    min-width: 80px;
 }
 
 /* ── Footer ── */
@@ -402,7 +416,7 @@ section[data-testid="stSidebar"] { display: none; }
 }
 .footer-text {
     font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
+    font-size: 0.85rem;
     letter-spacing: 0.08em;
     color: rgba(28,28,28,0.55);
 }
@@ -859,10 +873,16 @@ with st.container():
 
         fig = go.Figure()
         fig.add_vrect(x0="Jan 25", x1="Feb 26",
-                      fillcolor="rgba(163,32,32,0.05)", line_width=0,
-                      annotation_text="Post-DOGE period",
-                      annotation_position="top left",
-                      annotation_font=dict(color="rgba(28,28,28,0.60)", size=12))
+                      fillcolor="rgba(163,32,32,0.05)", line_width=0)
+        fig.add_annotation(
+            xref="x", yref="paper",
+            x="Jun 24", y=0.97,
+            text="Pre-DOGE period",
+            showarrow=False,
+            font=dict(size=16, color="rgba(28,28,28,0.55)", family=FONT),
+            xanchor="center",
+            yanchor="top",
+        )
         fig.add_trace(go.Scatter(
             x=months, y=dc_city, name="DC City (seas. adj.)",
             line=dict(color=CRIMSON, width=3),
@@ -1092,7 +1112,7 @@ st.markdown(f"""
         and embedded analyst roles with government agencies, nonprofits, and mission-driven
         firms in the DC metro area and beyond.
       </p>
-      <div class="hero-cta-row">
+      <div class="contact-cta-row">
         <a href="mailto:alhusaini.yaser@gmail.com" class="btn-gold">Send an Email</a>
         <a href="{resume_href}" download="Yaser_Alhusaini_Resume.pdf" class="btn-outline">Download Resume</a>
       </div>
