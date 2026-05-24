@@ -81,52 +81,68 @@ elif page == "Interactive Simulation Dashboard":
     st.sidebar.markdown("### 🎛️ Simulation Parameters")
     allocated_funding = st.sidebar.slider("Annual Budget Allocation ($)", min_value=100000, max_value=1500000, value=500000, step=50000)
     mentorship_ratio = st.sidebar.slider("Target Staff-to-Participant Ratio (1 : X)", min_value=5, max_value=30, value=15)
-    baseline_participants = st.sidebar.number_input("Enrolled Youth Target", min_value=50, max_value=500, value=200)
+    baseline_participants = st.sidebar.number_input("Enrolled Youth Target (Annual)", min_value=50, max_value=1000, value=200, step=25)
     
-    # 🧠 BACKEND LOGIC: Simulating real-time policy impact math
-    # Funding changes baseline success curves
-    funding_factor = allocated_funding / 500000
-    # Higher student/teacher ratio reduces success due to lower individual attention
-    staff_factor = 15 / mentorship_ratio 
+    # 🧠 FIXED BACKEND LOGIC: Clean, balanced linear impact scales
+    # Baseline calculations
+    base_funding_per_capita = 2500  # Cost per student baseline
+    actual_funding_per_capita = allocated_funding / baseline_participants
     
-    # Calculate simulated outcomes
-    completion_rate = min(0.95, 0.70 * (funding_factor ** 0.15) * (staff_factor ** 0.1))
-    placement_rate = min(0.90, 0.60 * (funding_factor ** 0.2) * (staff_factor ** 0.15))
+    # Funding Factor: Max benefit scales up or down based on resources per student
+    funding_impact = min(1.2, max(0.5, actual_funding_per_capita / base_funding_per_capita))
     
+    # Staffing Factor: Lower ratios (fewer students per staff member) = better support
+    staff_impact = min(1.2, max(0.6, 15 / mentorship_ratio))
+    
+    # Clean percentages that move smoothly
+    completion_rate = min(0.98, max(0.40, 0.75 * funding_impact * (staff_impact ** 0.5)))
+    placement_rate = min(0.95, max(0.35, 0.65 * (funding_impact ** 0.5) * staff_impact))
+    
+    # Calculate scaled outcomes
     total_completed = int(baseline_participants * completion_rate)
     total_placed = int(total_completed * placement_rate)
     
-    # DISPLAY METRICS (KPI Cards)
+    # DISPLAY METRICS (KPI Cards match the chart scales now)
     kpi1, kpi2, kpi3 = st.columns(3)
     kpi1.metric(label="Predicted Program Completion Rate", value=f"{completion_rate*100:.1f}%")
     kpi2.metric(label="Predicted Post-Program Job Placement", value=f"{placement_rate*100:.1f}%")
-    kpi3.metric(label="Total Youth Employed via Simulation", value=f"{total_placed} Pax")
+    kpi3.metric(label="Total Annual Placements", value=f"{total_placed} Placed / {baseline_participants} Enrolled")
     
-    st.markdown("### 📈 Visualizing the Trends")
+    st.markdown("### 📈 Visualizing Operational Progress (Cumulative Tracking)")
+    st.caption("This chart displays the cumulative programmatic expansion over a fiscal year based on your input constraints.")
     
-    # Create simulated monthly tracking data for a mock interactive chart
+    # Fix the Y-axis mismatch: Create an incremental cumulative rollout across months
     months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    np.random.seed(42)
     
-    # Generate interactive time-series chart data responsive to inputs
-    monthly_enrollment = np.round(np.linspace(baseline_participants/12, (baseline_participants/12)*1.3, 12)).astype(int)
-    monthly_placements = np.round(monthly_enrollment * completion_rate * placement_rate).astype(int)
+    # Create smooth operational ramp-up curves to match overall annual totals exactly
+    distribution = np.array([0.05, 0.08, 0.12, 0.18, 0.25, 0.35, 0.50, 0.65, 0.78, 0.88, 0.95, 1.00])
+    
+    cum_enrolled = np.round(baseline_participants * distribution).astype(int)
+    cum_completed = np.round(total_completed * distribution).astype(int)
+    cum_placed = np.round(total_placed * distribution).astype(int)
     
     df_chart = pd.DataFrame({
         "Month": months,
-        "Target Enrolled": monthly_enrollment,
-        "Simulated Job Placements": monthly_placements
+        "Total Enrolled Target": cum_enrolled,
+        "Successful Graduations": cum_completed,
+        "Secured Job Placements": cum_placed
     })
     
-  # Plotly Chart Generation
-    fig = px.bar(
+    # Fixed Plotly Chart Generation
+    fig = px.line(
         df_chart, 
         x="Month", 
-        y=["Target Enrolled", "Simulated Job Placements"],
-        barmode="group",  # <-- FIXED HERE
-        title="Simulated Operational Performance Tracking over 12 Months",
-        labels={"value": "Count of Participants", "variable": "Metric"},
-        color_discrete_sequence=["#1f77b4", "#ff7f0e"]
+        y=["Total Enrolled Target", "Successful Graduations", "Secured Job Placements"],
+        title="Fiscal Year Cumulative Pipeline Performance",
+        labels={"value": "Total Cumulative Participants", "variable": "Operational Stage"},
+        color_discrete_sequence=["#1f77b4", "#2ca02c", "#ff7f0e"],
+        markers=True
+    )
+    
+    # Restrict Y-axis dynamically to always show roughly 10% headroom over selected enrollment target
+    fig.update_layout(
+        yaxis_range=[0, max(100, int(baseline_participants * 1.1))],
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
     )
     
     st.plotly_chart(fig, use_container_width=True)
@@ -147,7 +163,6 @@ elif page == "Interactive Simulation Dashboard":
 elif page == "Full Experience":
     st.title("💼 Professional Background & Timeline")
     
-    # Quick Summary Checklist
     st.markdown("#### 🎓 Education")
     st.markdown("""
     * **The George Washington University** | PhD Courses, Public Policy & Public Administration (Research Methods Focus)
