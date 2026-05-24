@@ -700,18 +700,21 @@ div[data-testid="stButton"] > button:focus {
 # ── Takafu case study (session-state routed) ───────────────────────────────────
 if st.session_state.page == 'takafu':
     components.html("""<script>
-        (function() {
-            // Try every known Streamlit scroll container
+        function scrollUp() {
             var targets = [
                 window.parent.document.querySelector('[data-testid="stAppViewContainer"]'),
+                window.parent.document.querySelector('[data-testid="stMain"]'),
                 window.parent.document.querySelector('.main'),
-                window.parent.document.querySelector('section.main'),
                 window.parent.document.documentElement,
                 window.parent.document.body
             ];
-            targets.forEach(function(el) { if (el) el.scrollTop = 0; });
+            targets.forEach(function(el) { if (el) { el.scrollTop = 0; } });
             window.parent.scrollTo(0, 0);
-        })();
+        }
+        // Fire immediately, then again after Streamlit finishes re-rendering
+        scrollUp();
+        setTimeout(scrollUp, 150);
+        setTimeout(scrollUp, 500);
     </script>""", height=1)
     report_href = f'data:application/pdf;base64,{report_b64}' if report_b64 else '#'
     st.markdown("""
