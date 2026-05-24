@@ -1,4 +1,6 @@
 __pycache__/
 *.pyc
 .DS_Store
-photo.jpg
+.claude
+.devcontainer
+.git
