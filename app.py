@@ -894,10 +894,11 @@ div[data-testid="stButton"] > button:focus {
   .contact-cta-row { flex-direction: column !important; }
   .contact-cta-row a { width: 100% !important; text-align: center !important; }
 
-  /* Dashboard — hide charts, controls and sourcing on mobile */
+  /* Dashboard — hide everything except header and mobile note */
   div[data-testid="stPlotlyChart"] { display: none !important; }
   div[data-testid="stHorizontalBlock"] { display: none !important; }
   div[data-testid="stColumn"] { display: none !important; }
+  .live-bar { display: none !important; }
   .dash-desktop-only { display: none !important; }
   .dash-mobile-note { display: block !important; }
   .section-dashboard { padding-bottom: 2rem !important; }
