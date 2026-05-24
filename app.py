@@ -7,8 +7,8 @@ import base64
 import os
 
 st.set_page_config(
-    page_title="Yaser Alhusaini",
-    page_icon="",
+    page_title="Yaser Alhusaini · Policy & Data",
+    page_icon="◆",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -922,7 +922,7 @@ div[data-testid="stButton"] > button:focus {
 
 # ── Takafu case study (session-state routed) ───────────────────────────────────
 if st.session_state.page == 'takafu':
-    components.html("""<script>
+    st.iframe("""<script>
         function scrollUp() {
             var targets = [
                 window.parent.document.querySelector('[data-testid="stAppViewContainer"]'),
@@ -1028,7 +1028,7 @@ if st.session_state.page == 'takafu':
 
 # ── Georgetown / Early Retirement case study ───────────────────────────────────
 if st.session_state.page == 'georgetown':
-    components.html("""<script>
+    st.iframe("""<script>
         function scrollUp() {
             var targets = [
                 window.parent.document.querySelector('[data-testid="stAppViewContainer"]'),
@@ -1679,7 +1679,7 @@ with st.container():
             margin=dict(l=60, r=90, t=110, b=60),
         ))
         fig.update_layout(**layout)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         st.markdown('<div class="dash-desktop-only"><p style="font-size:0.78rem;color:rgba(28,28,28,0.45);font-family:\'DM Mono\',monospace;letter-spacing:0.05em;padding:0 3.5rem 0.5rem;">Source: Bureau of Labor Statistics, Local Area Unemployment Statistics (LAUS), 2024–2026.</p></div>', unsafe_allow_html=True)
 
     # ── Panel 2: Sector Job Losses ───────────────────────────────────────────
@@ -1750,7 +1750,7 @@ with st.container():
             margin=dict(l=200, r=90, t=130, b=60),
         ))
         fig.update_layout(**layout)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         st.markdown('<div class="dash-desktop-only"><p style="font-size:0.78rem;color:rgba(28,28,28,0.45);font-family:\'DM Mono\',monospace;letter-spacing:0.05em;padding:0 3.5rem 0.5rem;">Source: BLS Quarterly Census of Employment and Wages (QCEW); Moody\'s Analytics regional estimates, 2025.</p></div>', unsafe_allow_html=True)
 
     # ── Panel 3: Housing Squeeze ─────────────────────────────────────────────
@@ -1832,7 +1832,7 @@ with st.container():
             margin=dict(l=60, r=90, t=110, b=60),
         ))
         fig.update_layout(**layout)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         st.markdown('<div class="dash-desktop-only"><p style="font-size:0.78rem;color:rgba(28,28,28,0.45);font-family:\'DM Mono\',monospace;letter-spacing:0.05em;padding:0 3.5rem 0.5rem;">Source: Realtor.com Market Reports; Zillow Research; DC Office of Planning (DMPED), 2024–2026.</p></div>', unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
