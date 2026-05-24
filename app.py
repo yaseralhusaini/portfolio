@@ -1210,7 +1210,7 @@ st.markdown("""
       <ul class="exp-bullets">
         <li>Supported instruction in Quantitative Methods III — Advanced Regression and Program Evaluation Methods — at Georgetown's McCourt School of Public Policy.</li>
         <li>Provided guidance to 46 graduate students on interpreting econometric output, applying STATA for regression analysis, and designing rigorous program evaluations.</li>
-        <li>Contributed to course materials emphasizing data-driven policy analysis; the cohort was awarded best capstone graduation project for equity-focused program evaluation work.</li>
+        <li>Contributed to course materials emphasizing data-driven policy analysis and impact assessment methodologies.</li>
       </ul>
     </div>
   </div>
@@ -1245,6 +1245,7 @@ st.markdown("""
       <ul class="exp-bullets">
         <li>Evaluated socio-emotional learning (SEL) frameworks implemented across after-school programs, assessing each framework's evidence base, effectiveness, and measured impact on student outcomes through mixed-methods analysis.</li>
         <li>Recommended a suite of best-practice, evidence-based SEL frameworks to program leadership, with an implementation roadmap to strengthen equity-focused education outcomes for underserved youth.</li>
+        <li>This evaluation served as the Georgetown McCourt capstone project, which was awarded best capstone graduation project in the cohort.</li>
       </ul>
     </div>
   </div>
