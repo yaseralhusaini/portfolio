@@ -123,8 +123,8 @@ h1, h2, h3, h4, h5, h6 { color: #1c1c1c !important; }
 .btn-gold {
     display: inline-block;
     padding: 0.9rem 2.2rem;
-    background: #9c6f3a;
-    color: #f7f5f0;
+    background: #6b4718;
+    color: #ffffff;
     font-family: 'Jost', sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
@@ -135,7 +135,7 @@ h1, h2, h3, h4, h5, h6 { color: #1c1c1c !important; }
     cursor: pointer;
     transition: background 0.2s;
 }
-.btn-gold:hover { background: #b5833f; }
+.btn-gold:hover { background: #9c6f3a; }
 .btn-outline {
     display: inline-block;
     padding: 0.9rem 2.2rem;
@@ -143,15 +143,15 @@ h1, h2, h3, h4, h5, h6 { color: #1c1c1c !important; }
     color: #1c1c1c;
     font-family: 'Jost', sans-serif;
     font-size: 0.9rem;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     text-decoration: none;
-    border: 1px solid rgba(28,28,28,0.4);
+    border: 2px solid rgba(28,28,28,0.75);
     cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
+    transition: border-color 0.2s, background 0.2s;
 }
-.btn-outline:hover { border-color: #1c1c1c; }
+.btn-outline:hover { border-color: #1c1c1c; background: rgba(28,28,28,0.05); }
 
 /* ── Stats column (right of hero) ── */
 .stats-column {
@@ -960,7 +960,15 @@ with st.container():
             text=df["Jobs Lost"].apply(lambda x: f"{x:,}"),
             textposition="outside",
             textfont=dict(color="#1c1c1c", size=13),
+            showlegend=False,
         ))
+        # Dummy traces so legend appears above chart (always show all 3 categories)
+        for cat, color in color_map.items():
+            fig.add_trace(go.Bar(
+                x=[None], y=[None], name=cat,
+                marker=dict(color=color),
+                orientation="h", showlegend=True,
+            ))
         layout = base_layout.copy()
         layout.update(dict(
             title=dict(text="DMV Job Losses by Sector — 2025 Year-over-Year",
@@ -968,21 +976,23 @@ with st.container():
             xaxis=dict(**base_layout["xaxis"],
                        title=dict(text="Jobs Lost", font=dict(size=14, color=TICK)),
                        tickformat=","),
-            height=460,
-            showlegend=False,
-            margin=dict(l=200, r=60, t=80, b=60),
+            height=520,
+            showlegend=True,
+            legend=dict(
+                bgcolor="rgba(255,255,255,0.97)",
+                bordercolor="rgba(28,28,28,0.20)",
+                borderwidth=1,
+                font=dict(size=15, color="#1c1c1c", family=FONT),
+                orientation="h",
+                yanchor="bottom",
+                y=1.04,
+                xanchor="left",
+                x=0.16,
+            ),
+            margin=dict(l=200, r=60, t=130, b=60),
         ))
         fig.update_layout(**layout)
         st.plotly_chart(fig, use_container_width=True)
-
-        # Inline legend
-        st.markdown(f"""
-        <div style="display:flex;gap:2.5rem;padding:0.8rem 0 1.2rem;font-size:0.9rem;color:rgba(28,28,28,0.80);font-family:'Jost',sans-serif;font-weight:400;">
-          <span><span style="color:{CRIMSON};font-size:1.2rem;">■</span>&nbsp; Direct — Federal</span>
-          <span><span style="color:{GOLD};font-size:1.2rem;">■</span>&nbsp; Direct — Contracting</span>
-          <span><span style="color:{NAVY};font-size:1.2rem;">■</span>&nbsp; Downstream</span>
-        </div>
-        """, unsafe_allow_html=True)
 
     # ── Panel 3: Housing Squeeze ─────────────────────────────────────────────
     elif panel == "Housing Squeeze":
