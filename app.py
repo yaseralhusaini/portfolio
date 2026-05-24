@@ -699,7 +699,20 @@ div[data-testid="stButton"] > button:focus {
 
 # ── Takafu case study (session-state routed) ───────────────────────────────────
 if st.session_state.page == 'takafu':
-    components.html("<script>window.parent.scrollTo(0, 0);</script>", height=0)
+    components.html("""<script>
+        (function() {
+            // Try every known Streamlit scroll container
+            var targets = [
+                window.parent.document.querySelector('[data-testid="stAppViewContainer"]'),
+                window.parent.document.querySelector('.main'),
+                window.parent.document.querySelector('section.main'),
+                window.parent.document.documentElement,
+                window.parent.document.body
+            ];
+            targets.forEach(function(el) { if (el) el.scrollTop = 0; });
+            window.parent.scrollTo(0, 0);
+        })();
+    </script>""", height=1)
     report_href = f'data:application/pdf;base64,{report_b64}' if report_b64 else '#'
     st.markdown("""
 <nav class="nav-bar">
