@@ -830,6 +830,50 @@ div[data-testid="stButton"] > button:focus {
 .cs-callout p { font-size:1.15rem; font-weight:300; line-height:1.85; color:rgba(28,28,28,0.82); margin:0; }
 .cs-btn-row { padding: 2.5rem 4rem; display:flex; gap:1.2rem; flex-wrap:wrap; align-items:center; border-top:1px solid rgba(26,26,26,0.07); }
 
+/* ── Segmented Control ── */
+div[data-testid="stSegmentedControl"] {
+    display: flex !important;
+    justify-content: center !important;
+}
+div[data-testid="stSegmentedControl"] button {
+    color: #3d2a0f !important;
+    background: rgba(156,111,58,0.06) !important;
+    border: 1.5px solid rgba(156,111,58,0.40) !important;
+    border-radius: 0 !important;
+    font-family: 'Jost', sans-serif !important;
+    font-size: 0.88rem !important;
+    letter-spacing: 0.07em !important;
+    font-weight: 400 !important;
+    transition: background 0.2s, color 0.2s !important;
+}
+div[data-testid="stSegmentedControl"] button:hover {
+    background: rgba(156,111,58,0.15) !important;
+    color: #6b4718 !important;
+    border-color: rgba(156,111,58,0.65) !important;
+}
+div[data-testid="stSegmentedControl"] button[aria-pressed="true"],
+div[data-testid="stSegmentedControl"] button[aria-selected="true"],
+div[data-testid="stSegmentedControl"] button[aria-checked="true"],
+div[data-testid="stSegmentedControl"] button[data-selected="true"],
+div[data-testid="stSegmentedControl"] button.selected {
+    background: #9c6f3a !important;
+    color: #f7f5f0 !important;
+    border-color: #9c6f3a !important;
+    font-weight: 500 !important;
+}
+div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:hover,
+div[data-testid="stSegmentedControl"] button[aria-selected="true"]:hover,
+div[data-testid="stSegmentedControl"] button[aria-checked="true"]:hover {
+    background: #7a5520 !important;
+    color: #f7f5f0 !important;
+    border-color: #7a5520 !important;
+}
+/* Label above segmented control */
+div[data-testid="stSegmentedControl"] + div label,
+div[data-testid="stSegmentedControl"] label {
+    display: none !important;
+}
+
 /* Featured service card (spans full row) */
 .skill-card-featured {
     background: #ede9e0;
@@ -933,6 +977,7 @@ div[data-testid="stButton"] > button:focus {
   div[data-testid="stPlotlyChart"] { display: none !important; }
   div[data-testid="stHorizontalBlock"] { display: none !important; }
   div[data-testid="stColumn"] { display: none !important; }
+  div[data-testid="stSegmentedControl"] { display: none !important; }
   .live-bar { display: none !important; }
   .dash-desktop-only { display: none !important; }
   .dash-mobile-note { display: block !important; }
@@ -1170,7 +1215,7 @@ if st.session_state.page == 'georgetown':
 
 # ── Aspire case study ──────────────────────────────────────────────────────────
 if st.session_state.page == 'aspire':
-    components.html("""<script>
+    st.iframe("""<script>
         function scrollUp() {
             var targets = [
                 window.parent.document.querySelector('[data-testid="stAppViewContainer"]'),
@@ -1704,12 +1749,14 @@ st.markdown("</section>", unsafe_allow_html=True)
 with st.container():
     st.markdown('<div style="padding: 0 4rem 2rem;">', unsafe_allow_html=True)
 
-    panel = st.segmented_control(
-        "Panel",
-        ["Unemployment Trend", "Sector Job Losses", "Housing Squeeze"],
-        default="Unemployment Trend",
-        label_visibility="collapsed"
-    )
+    _, col_panel, _ = st.columns([1, 4, 1])
+    with col_panel:
+        panel = st.segmented_control(
+            "Panel",
+            ["Unemployment Trend", "Sector Job Losses", "Housing Squeeze"],
+            default="Unemployment Trend",
+            label_visibility="collapsed"
+        )
 
     # Defaults — overridden below if the panel needs a secondary filter
     show_nat   = True
@@ -1717,21 +1764,27 @@ with st.container():
     metric     = "Both"
 
     # Secondary filter only for panels that need it
+    _cat_labels = ["All", "Federal", "Contracting", "Downstream"]
+    _cat_map    = {"Federal": "Direct — Federal", "Contracting": "Direct — Contracting", "Downstream": "Downstream"}
+
     if panel == "Sector Job Losses":
-        col_f, _ = st.columns([3, 5])
+        _, col_f, _ = st.columns([1, 4, 1])
         with col_f:
-            cat_filter = st.selectbox(
+            _cat_sel   = st.segmented_control(
                 "Filter by category",
-                ["All", "Direct — Federal", "Direct — Contracting", "Downstream"],
-                label_visibility="visible"
+                _cat_labels,
+                default="All",
+                label_visibility="collapsed"
             )
+            cat_filter = _cat_map.get(_cat_sel, "All") if _cat_sel != "All" else "All"
     elif panel == "Housing Squeeze":
-        col_f, _ = st.columns([2, 6])
+        _, col_f, _ = st.columns([1, 4, 1])
         with col_f:
-            metric = st.selectbox(
+            metric = st.segmented_control(
                 "Show metric",
                 ["Both", "Listings only", "Price change only"],
-                label_visibility="visible"
+                default="Both",
+                label_visibility="collapsed"
             )
 
     # ── Plotly shared theme ──────────────────────────────────────────────────
