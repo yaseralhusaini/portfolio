@@ -946,7 +946,7 @@ st.markdown("""
         <span class="work-finding-label">Key finding</span>
         <span class="work-finding-text">46% economic opportunity gap between men and women across Saudi Arabia's private sector, measured across 7.8 million GOSI employees.</span>
       </div>
-      <a href="/takafu" target="_self" class="btn-outline work-link">Read case study →</a>
+      <a href="./takafu" target="_self" class="btn-outline work-link">Read case study →</a>
     </div>
     <div class="work-placeholder">More case studies coming soon</div>
   </div>
