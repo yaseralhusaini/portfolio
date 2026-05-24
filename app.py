@@ -112,7 +112,7 @@ h1, h2, h3, h4, h5, h6 { color: #1c1c1c !important; }
     animation: expandWidth 1s ease 0.8s both;
 }
 .hero-desc {
-    font-size: 1.22rem;
+    font-size: 1.3rem;
     font-weight: 300;
     line-height: 1.85;
     color: rgba(28,28,28,0.80);
@@ -241,7 +241,7 @@ a.btn-outline:hover {
 }
 .stat-num span { color: #9c6f3a; }
 .stat-label {
-    font-size: 0.95rem;
+    font-size: 1.02rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: rgba(28,28,28,0.65);
@@ -294,14 +294,14 @@ a.btn-outline:hover {
 .exp-item:last-child { border-bottom: none; }
 .exp-date {
     font-family: 'DM Mono', monospace;
-    font-size: 0.87rem;
+    font-size: 0.94rem;
     color: #9c6f3a;
     letter-spacing: 0.08em;
     margin-bottom: 0.5rem;
     line-height: 1.6;
 }
 .exp-org {
-    font-size: 0.95rem;
+    font-size: 1.02rem;
     color: rgba(28,28,28,0.60);
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -309,24 +309,24 @@ a.btn-outline:hover {
 }
 .exp-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.75rem;
+    font-size: 1.85rem;
     font-weight: 400;
     color: #1c1c1c;
     margin-bottom: 0.4rem;
     line-height: 1.2;
 }
 .exp-loc {
-    font-size: 0.93rem;
+    font-size: 1rem;
     color: rgba(28,28,28,0.55);
     letter-spacing: 0.06em;
     margin-bottom: 1.2rem;
 }
 .exp-bullets { list-style: none; padding: 0; }
 .exp-bullets li {
-    font-size: 1.08rem;
+    font-size: 1.18rem;
     font-weight: 300;
     color: rgba(28,28,28,0.82);
-    line-height: 1.8;
+    line-height: 1.85;
     padding-left: 1.2rem;
     position: relative;
     margin-bottom: 0.5rem;
@@ -361,7 +361,7 @@ a.btn-outline:hover {
     margin-bottom: 1rem;
 }
 .skill-items {
-    font-size: 1.08rem;
+    font-size: 1.18rem;
     font-weight: 300;
     color: rgba(28,28,28,0.80);
     line-height: 2;
@@ -369,7 +369,7 @@ a.btn-outline:hover {
 
 /* ── Dashboard ── */
 .dash-intro {
-    font-size: 0.98rem;
+    font-size: 1.15rem;
     font-weight: 300;
     line-height: 1.85;
     color: rgba(28,28,28,0.78);
@@ -407,12 +407,12 @@ a.btn-outline:hover {
 }
 .live-val.danger { color: #a32020; }
 .live-lbl {
-    font-size: 0.85rem;
+    font-size: 0.98rem;
     font-weight: 400;
     color: rgba(28,28,28,0.75);
     margin-bottom: 0.5rem;
 }
-.live-delta { font-family: 'DM Mono', monospace; font-size: 0.78rem; }
+.live-delta { font-family: 'DM Mono', monospace; font-size: 0.88rem; }
 .delta-bad { color: #a32020; }
 .delta-ok { color: #2d6e42; }
 
@@ -449,7 +449,7 @@ a.btn-outline:hover {
     margin-bottom: 1.5rem;
 }
 .contact-sub {
-    font-size: 1.12rem;
+    font-size: 1.22rem;
     font-weight: 300;
     line-height: 1.85;
     color: rgba(28,28,28,0.72);
@@ -467,7 +467,7 @@ a.btn-outline:hover {
     gap: 1rem;
     padding: 1.2rem 0;
     border-top: 1px solid rgba(26,26,26,0.07);
-    font-size: 1.08rem;
+    font-size: 1.18rem;
     font-weight: 300;
     color: rgba(28,28,28,0.85);
 }
