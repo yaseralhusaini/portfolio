@@ -905,7 +905,7 @@ st.markdown(f"""
   <section class="hero-content">
     <div class="hero-overline">Policy · Data · Research · Impact</div>
     <h1 class="hero-title">
-      Research that<br>moves people<br><em>forward.</em>
+      Policy grounded<br>in evidence.<br><em>Built to deliver.</em>
     </h1>
     <div class="hero-line"></div>
     <p class="hero-desc">
