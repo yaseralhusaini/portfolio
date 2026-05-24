@@ -1702,25 +1702,32 @@ st.markdown("</section>", unsafe_allow_html=True)
 
 # ── Chart controls ─────────────────────────────────────────────────────────────
 with st.container():
-    st.markdown('<div style="padding: 0 4rem 4rem;">', unsafe_allow_html=True)
+    st.markdown('<div style="padding: 0 4rem 2rem;">', unsafe_allow_html=True)
 
-    col1, col2, col3 = st.columns([2, 2, 4])
-    with col1:
-        panel = st.selectbox(
-            "Select Panel",
-            ["Unemployment Trend", "Sector Job Losses", "Housing Squeeze"],
-            label_visibility="visible"
-        )
-    with col2:
-        if panel == "Unemployment Trend":
-            show_nat = st.checkbox("Show national baseline", value=True)
-        elif panel == "Sector Job Losses":
+    panel = st.segmented_control(
+        "Panel",
+        ["Unemployment Trend", "Sector Job Losses", "Housing Squeeze"],
+        default="Unemployment Trend",
+        label_visibility="collapsed"
+    )
+
+    # Defaults — overridden below if the panel needs a secondary filter
+    show_nat   = True
+    cat_filter = "All"
+    metric     = "Both"
+
+    # Secondary filter only for panels that need it
+    if panel == "Sector Job Losses":
+        col_f, _ = st.columns([3, 5])
+        with col_f:
             cat_filter = st.selectbox(
                 "Filter by category",
                 ["All", "Direct — Federal", "Direct — Contracting", "Downstream"],
                 label_visibility="visible"
             )
-        elif panel == "Housing Squeeze":
+    elif panel == "Housing Squeeze":
+        col_f, _ = st.columns([2, 6])
+        with col_f:
             metric = st.selectbox(
                 "Show metric",
                 ["Both", "Listings only", "Price change only"],
