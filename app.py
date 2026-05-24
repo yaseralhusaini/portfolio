@@ -894,17 +894,11 @@ div[data-testid="stButton"] > button:focus {
   .contact-cta-row { flex-direction: column !important; }
   .contact-cta-row a { width: 100% !important; text-align: center !important; }
 
-  /* Dashboard controls — stack columns vertically on mobile */
-  div[data-testid="stHorizontalBlock"] {
-    flex-wrap: wrap !important;
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
-  }
-  div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"] {
-    width: 100% !important;
-    flex: 0 0 100% !important;
-    min-width: 0 !important;
-  }
+  /* Dashboard — hide charts and controls on mobile */
+  div[data-testid="stPlotlyChart"] { display: none !important; }
+  div[data-testid="stHorizontalBlock"] { display: none !important; }
+  .dash-desktop-only { display: none !important; }
+  .dash-mobile-note { display: block !important; }
 
   /* Prevent any element from causing horizontal scroll */
   body, .stApp, .block-container { overflow-x: hidden !important; }
@@ -1508,10 +1502,13 @@ st.markdown("""
     <span class="section-num">05</span>
     <span class="section-title">DMV Federal Workforce Impact — Interactive Dashboard</span>
   </div>
-  <p class="dash-intro">
+  <p class="dash-intro dash-desktop-only">
     A data lens on how federal workforce reductions have reshaped the DC–Maryland–Virginia regional economy.
     This dashboard reflects the kind of analytical work I build for agency and nonprofit clients —
     translating labor market and housing data into clear, decision-ready insights. Use the filters to explore each dimension.
+  </p>
+  <p class="dash-mobile-note" style="display:none;font-size:1rem;font-weight:300;color:rgba(28,28,28,0.55);font-family:'Jost',sans-serif;padding:1rem 0;border-top:1px solid rgba(26,26,26,0.08);">
+    Interactive charts are best viewed on desktop. Visit yaseralhusaini.com on a larger screen to explore the DMV federal workforce dashboard.
   </p>
 """, unsafe_allow_html=True)
 
