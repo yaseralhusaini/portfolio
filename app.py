@@ -551,6 +551,77 @@ div[data-testid="stHorizontalBlock"] {
     padding-right: 1rem !important;
 }
 
+/* ── Selected Work ── */
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(26,26,26,0.08);
+    border: 1px solid rgba(26,26,26,0.08);
+}
+.work-card {
+    background: #f7f5f0;
+    padding: 2.8rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    transition: background 0.2s;
+}
+.work-card:hover { background: #efece5; }
+.work-overline {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.80rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #9c6f3a;
+}
+.work-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.1rem;
+    font-weight: 400;
+    color: #1c1c1c;
+    line-height: 1.15;
+    margin: 0;
+}
+.work-meta {
+    font-size: 0.95rem;
+    color: rgba(28,28,28,0.52);
+    letter-spacing: 0.05em;
+}
+.work-finding {
+    border-left: 2px solid #9c6f3a;
+    padding-left: 1.2rem;
+    margin: 0.4rem 0;
+}
+.work-finding-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(28,28,28,0.45);
+    display: block;
+    margin-bottom: 0.4rem;
+}
+.work-finding-text {
+    font-size: 1.12rem;
+    font-weight: 300;
+    color: #1c1c1c;
+    line-height: 1.55;
+}
+.work-link { margin-top: 0.8rem; align-self: flex-start; }
+.work-placeholder {
+    background: #f0ede6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.8rem 2.5rem;
+    color: rgba(28,28,28,0.30);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
 /* Featured service card (spans full row) */
 .skill-card-featured {
     background: #ede9e0;
@@ -576,6 +647,7 @@ st.markdown("""
   <div class="nav-name">Yaser Alhusaini</div>
   <div class="nav-links">
     <a href="#experience">Experience</a>
+    <a href="#selected-work">Work</a>
     <a href="#dashboard">Dashboard</a>
     <a href="#services">Services</a>
     <a href="#contact">Contact</a>
@@ -857,12 +929,36 @@ st.markdown("""
 </section>
 """, unsafe_allow_html=True)
 
+# ── Selected Work ──────────────────────────────────────────────────────────────
+st.markdown('<div id="selected-work"></div>', unsafe_allow_html=True)
+st.markdown("""
+<section class="section">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <span class="section-title">Selected Work</span>
+  </div>
+  <div class="work-grid">
+    <div class="work-card">
+      <div class="work-overline">01 · Gender Equity Research</div>
+      <h3 class="work-title">Takafu Equal Opportunity Index</h3>
+      <div class="work-meta">Gender Parity Index &nbsp;·&nbsp; Saudi Arabia &nbsp;·&nbsp; 2022</div>
+      <div class="work-finding">
+        <span class="work-finding-label">Key finding</span>
+        <span class="work-finding-text">46% economic opportunity gap between men and women across Saudi Arabia's private sector, measured across 7.8 million GOSI employees.</span>
+      </div>
+      <a href="/takafu" target="_self" class="btn-outline work-link">Read case study →</a>
+    </div>
+    <div class="work-placeholder">More case studies coming soon</div>
+  </div>
+</section>
+""", unsafe_allow_html=True)
+
 # ── Dashboard ──────────────────────────────────────────────────────────────────
 st.markdown('<div id="dashboard"></div>', unsafe_allow_html=True)
 st.markdown("""
 <section class="section">
   <div class="section-header">
-    <span class="section-num">04</span>
+    <span class="section-num">05</span>
     <span class="section-title">DMV Federal Workforce Impact — Interactive Dashboard</span>
   </div>
   <p class="dash-intro">
@@ -1199,7 +1295,7 @@ st.markdown('<div id="services"></div>', unsafe_allow_html=True)
 st.markdown("""
 <section class="section section-alt">
   <div class="section-header">
-    <span class="section-num">05</span>
+    <span class="section-num">06</span>
     <span class="section-title">Services</span>
   </div>
   <div class="skills-grid">
@@ -1250,7 +1346,7 @@ st.markdown('<div id="contact"></div>', unsafe_allow_html=True)
 st.markdown(f"""
 <section class="section">
   <div class="section-header">
-    <span class="section-num">06</span>
+    <span class="section-num">07</span>
     <span class="section-title">Work Together</span>
   </div>
   <div class="contact-grid">
