@@ -634,6 +634,40 @@ a#takafu-work-card:hover::after {
     color: #9c6f3a;
     transform: translateX(4px);
 }
+a#georgetown-work-card {
+    text-decoration: none !important;
+    color: inherit !important;
+    cursor: pointer;
+    position: relative;
+    border-top: 3px solid transparent;
+    transition: background 0.2s, border-top-color 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+a#georgetown-work-card:hover {
+    background: #efece5;
+    border-top-color: #9c6f3a;
+    box-shadow: 0 4px 20px rgba(156,111,58,0.10);
+}
+a#georgetown-work-card::after {
+    content: '→';
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.8rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 1.1rem;
+    color: rgba(156,111,58,0.45);
+    transition: color 0.2s, transform 0.2s;
+}
+a#georgetown-work-card:hover::after {
+    color: #9c6f3a;
+    transform: translateX(4px);
+}
+a#georgetown-work-card:hover .work-pill {
+    background: #9c6f3a;
+    color: #f7f5f0 !important;
+}
 .work-overline {
     font-family: 'DM Mono', monospace;
     font-size: 0.80rem;
@@ -1209,8 +1243,8 @@ st.markdown("""
       <div class="exp-title">Pro-Bono Consultant</div>
       <div class="exp-loc">Washington, DC</div>
       <ul class="exp-bullets">
-        <li>Evaluated after-school program outcomes using mixed-methods analysis, including participant surveys, observation data, and outcome tracking across program cohorts.</li>
-        <li>Delivered findings and actionable recommendations to program leadership to guide improvement of equity-focused education programs serving underserved youth.</li>
+        <li>Evaluated socio-emotional learning (SEL) frameworks implemented across after-school programs, assessing each framework's evidence base, effectiveness, and measured impact on student outcomes through mixed-methods analysis.</li>
+        <li>Recommended a suite of best-practice, evidence-based SEL frameworks to program leadership, with an implementation roadmap to strengthen equity-focused education outcomes for underserved youth.</li>
       </ul>
     </div>
   </div>
@@ -1338,7 +1372,16 @@ st.markdown("""
       </div>
       <div><span class="work-pill">Read case study →</span></div>
     </a>
-    <div class="work-placeholder">More case studies coming soon</div>
+    <a href="?page=georgetown" target="_self" class="work-card" id="georgetown-work-card">
+      <div class="work-overline">02 · Labor Economics</div>
+      <div class="work-title">Early Retirement in the Private Sector</div>
+      <div class="work-meta">Pension Policy Research &nbsp;·&nbsp; Saudi Arabia &nbsp;·&nbsp; 2017–2018</div>
+      <div class="work-finding">
+        <span class="work-finding-label">Key finding</span>
+        <span class="work-finding-text">A 50% increase in the implicit tax rate raises early retirement probability by 20%. Research recommendations adopted as national pension policy across Saudi Arabia five years after publication.</span>
+      </div>
+      <div><span class="work-pill">Read case study →</span></div>
+    </a>
   </div>
 </section>
 """, unsafe_allow_html=True)
