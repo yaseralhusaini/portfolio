@@ -351,24 +351,26 @@ a.btn-outline:hover {
     color: #9c6f3a;
 }
 
-/* ── Experience case study link ── */
-.exp-case-link {
+/* ── Experience case study button (HTML anchor styled as outline btn) ── */
+.btn-exp-cs {
     display: inline-block;
-    margin-top: 1.2rem;
+    margin-top: 1.4rem;
+    background: transparent;
+    color: #6b4718;
+    border: 2px solid #9c6f3a;
     font-family: 'Jost', sans-serif;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #9c6f3a;
+    padding: 0.55rem 1.2rem;
     text-decoration: none;
-    border-bottom: 1px solid rgba(156,111,58,0.35);
-    padding-bottom: 0.15rem;
-    transition: color 0.2s, border-bottom-color 0.2s;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
 }
-.exp-case-link:hover {
-    color: #6b4718;
-    border-bottom-color: #6b4718;
+.btn-exp-cs:hover {
+    background: #9c6f3a;
+    color: #f7f5f0;
 }
 
 /* ── Skills grid ── */
@@ -979,6 +981,7 @@ st.markdown("""
     <div>
       <div class="exp-date">Feb 2022 — Aug 2022</div>
       <div class="exp-org">Alnahda Society / Alwathba Consultancy</div>
+      <a href="?page=takafu" class="btn-exp-cs">Read case study →</a>
     </div>
     <div>
       <div class="exp-title">Research Analyst — Takafu Equal Opportunity Index</div>
@@ -990,7 +993,6 @@ st.markdown("""
         <li>Designed and analyzed dual survey instruments — one targeting HR managers, one targeting employees — collecting responses from 57 companies and 985 Saudi workers across Riyadh, Makkah, and the Eastern Province.</li>
         <li>Synthesized quantitative findings and qualitative survey data into the published Takafu 2020 Executive Summary, with policy and employer recommendations cited by government stakeholders aligned to Saudi Vision 2030.</li>
       </ul>
-      <a href="?page=takafu" class="exp-case-link">Read Takafu case study →</a>
     </div>
   </div>
 </div>
