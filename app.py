@@ -386,7 +386,7 @@ a.btn-outline:hover {
 }
 .live-cell {
     background: #ffffff;
-    padding: 1.8rem 2rem;
+    padding: 2rem 4.5rem;
 }
 .live-period {
     font-family: 'DM Mono', monospace;
@@ -518,6 +518,31 @@ div[data-testid="stMarkdownContainer"] p { margin: 0; }
 div[data-testid="stSelectbox"] label,
 div[data-testid="stCheckbox"] label {
     color: #1c1c1c !important;
+    font-size: 1.06rem !important;
+}
+
+/* Experience — secondary section divider */
+.exp-section-divider {
+    padding: 1.8rem 0 1rem;
+    border-top: 1px solid rgba(26,26,26,0.08);
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+.exp-section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(26,26,26,0.06);
+}
+.exp-section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.80rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(28,28,28,0.42);
+    white-space: nowrap;
 }
 
 /* Dashboard chart container horizontal padding */
@@ -579,7 +604,7 @@ st.markdown(f"""
     </div>
     <div class="hero-mpp">
       <div class="hero-mpp-title">Master of Public Policy</div>
-      <div class="hero-mpp-sub">Georgetown McCourt School · MPP</div>
+      <div class="hero-mpp-sub">Georgetown University · McCourt School of Public Policy · 2020</div>
     </div>
   </section>
 
@@ -597,8 +622,13 @@ st.markdown(f"""
         <div class="stat-label">Staff trained in data &amp; evaluation</div>
       </div>
       <div class="stat-row">
-        <div class="stat-num">3</div>
-        <div class="stat-label">Countries — United States · United Kingdom · Saudi Arabia</div>
+        <div class="stat-num">5</div>
+        <div class="stat-label">
+          Countries<br>
+          <span style="font-size:0.87em;color:rgba(28,28,28,0.55);line-height:2;display:block;">Middle East — Saudi Arabia · UAE · Egypt</span>
+          <span style="font-size:0.87em;color:rgba(28,28,28,0.55);line-height:1.6;display:block;">North America — United States</span>
+          <span style="font-size:0.87em;color:rgba(28,28,28,0.55);line-height:1.6;display:block;">Europe — United Kingdom</span>
+        </div>
       </div>
     </div>
   </div>
@@ -688,6 +718,10 @@ st.markdown("""
     </div>
   </div>
 
+  <div class="exp-section-divider">
+    <span class="exp-section-label">Additional Research &amp; Analysis</span>
+  </div>
+
   <div class="exp-item">
     <div>
       <div class="exp-date">Feb — Jun 2021</div>
@@ -705,21 +739,6 @@ st.markdown("""
 
   <div class="exp-item">
     <div>
-      <div class="exp-date">Sep — Dec 2019</div>
-      <div class="exp-org">World Bank</div>
-    </div>
-    <div>
-      <div class="exp-title">Data Analysis Intern — Doing Business 2020</div>
-      <div class="exp-loc">Washington, DC</div>
-      <ul class="exp-bullets">
-        <li>Conducted descriptive and inferential analysis on international business regulation data for 200+ countries using STATA and R, contributing to the World Bank's Doing Business 2020 publication.</li>
-        <li>Built outlier detection routines and cross-year validation checks; produced internal memos translating findings into policy-ready insights for project teams.</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="exp-item">
-    <div>
       <div class="exp-date">Jul — Oct 2020<br>May 2017 — Jul 2018</div>
       <div class="exp-org">Georgetown University</div>
     </div>
@@ -730,6 +749,21 @@ st.markdown("""
         <li>Research Fellow: co-managed a 500-participant labor market survey under a Georgetown–Harvard Kennedy School collaboration; synthesized findings into policy briefs for government and academic partners in Saudi Arabia.</li>
         <li>Teaching Assistant: supported instruction in Quantitative Methods III — Advanced Regression and Program Evaluation Methods — advising 46 graduate students on STATA-based econometric analysis and capstone evaluations.</li>
         <li>Georgetown awarded best capstone graduation project for equity-focused program evaluation work.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div>
+      <div class="exp-date">Sep — Dec 2019</div>
+      <div class="exp-org">World Bank</div>
+    </div>
+    <div>
+      <div class="exp-title">Data Analysis Intern — Doing Business 2020</div>
+      <div class="exp-loc">Washington, DC</div>
+      <ul class="exp-bullets">
+        <li>Conducted descriptive and inferential analysis on international business regulation data for 200+ countries using STATA and R, contributing to the World Bank's Doing Business 2020 publication.</li>
+        <li>Built outlier detection routines and cross-year validation checks; produced internal memos translating findings into policy-ready insights for project teams.</li>
       </ul>
     </div>
   </div>
@@ -995,7 +1029,7 @@ with st.container():
         layout = base_layout.copy()
         layout.update(dict(
             title=dict(text="DMV Unemployment Rate vs. National — Jan 2024 to Feb 2026",
-                       font=dict(size=17, color="#1c1c1c", family=FONT), x=0.01, y=0.97),
+                       font=dict(size=17, color="#1c1c1c", family=FONT), x=0.5, xanchor="center", y=0.97),
             yaxis=dict(**base_layout["yaxis"], ticksuffix="%",
                        title=dict(text="Unemployment Rate", font=dict(size=14, color=TICK))),
             height=520,
@@ -1003,6 +1037,7 @@ with st.container():
         ))
         fig.update_layout(**layout)
         st.plotly_chart(fig, use_container_width=True)
+        st.markdown('<p style="font-size:0.78rem;color:rgba(28,28,28,0.45);font-family:\'DM Mono\',monospace;letter-spacing:0.05em;padding:0 3.5rem 0.5rem;">Source: Bureau of Labor Statistics, Local Area Unemployment Statistics (LAUS), 2024–2026.</p>', unsafe_allow_html=True)
 
     # ── Panel 2: Sector Job Losses ───────────────────────────────────────────
     elif panel == "Sector Job Losses":
@@ -1051,7 +1086,7 @@ with st.container():
         layout = base_layout.copy()
         layout.update(dict(
             title=dict(text="DMV Job Losses by Sector — 2025 Year-over-Year",
-                       font=dict(size=17, color="#1c1c1c", family=FONT), x=0.01, y=0.97),
+                       font=dict(size=17, color="#1c1c1c", family=FONT), x=0.5, xanchor="center", y=0.97),
             xaxis=dict(**base_layout["xaxis"],
                        title=dict(text="Jobs Lost", font=dict(size=14, color=TICK)),
                        tickformat=",",
@@ -1073,6 +1108,7 @@ with st.container():
         ))
         fig.update_layout(**layout)
         st.plotly_chart(fig, use_container_width=True)
+        st.markdown('<p style="font-size:0.78rem;color:rgba(28,28,28,0.45);font-family:\'DM Mono\',monospace;letter-spacing:0.05em;padding:0 3.5rem 0.5rem;">Source: BLS Quarterly Census of Employment and Wages (QCEW); Moody\'s Analytics regional estimates, 2025.</p>', unsafe_allow_html=True)
 
     # ── Panel 3: Housing Squeeze ─────────────────────────────────────────────
     elif panel == "Housing Squeeze":
@@ -1134,7 +1170,7 @@ with st.container():
         layout = base_layout.copy()
         layout.update(dict(
             title=dict(text="DMV Housing: Listing Surge vs. Price Pressure — 2024 to 2026",
-                       font=dict(size=17, color="#1c1c1c", family=FONT), x=0.01, y=0.97),
+                       font=dict(size=17, color="#1c1c1c", family=FONT), x=0.5, xanchor="center", y=0.97),
             yaxis=primary_yaxis,
             yaxis2=dict(
                 title=dict(text="Price Change YoY %", font=dict(size=14, color=TICK)),
@@ -1154,6 +1190,7 @@ with st.container():
         ))
         fig.update_layout(**layout)
         st.plotly_chart(fig, use_container_width=True)
+        st.markdown('<p style="font-size:0.78rem;color:rgba(28,28,28,0.45);font-family:\'DM Mono\',monospace;letter-spacing:0.05em;padding:0 3.5rem 0.5rem;">Source: Realtor.com Market Reports; Zillow Research; DC Office of Planning (DMPED), 2024–2026.</p>', unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
 
