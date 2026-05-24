@@ -952,11 +952,12 @@ st.markdown("""
 </section>
 """, unsafe_allow_html=True)
 
-# Streamlit-native link to the multipage app file.
-# This avoids broken raw HTML routing on Streamlit Community Cloud.
-st.markdown('<div style="margin: -5.8rem 0 4rem 6.5rem; position: relative; z-index: 5; width: fit-content;">', unsafe_allow_html=True)
-st.page_link("pages/takafu.py", label="Read case study →")
-st.markdown('</div>', unsafe_allow_html=True)
+# Streamlit page link fallback
+st.markdown("""
+<div style="margin: -5.8rem 0 4rem 6.5rem; position: relative; z-index: 5; width: fit-content;">
+  <a href="/takafu" target="_self" class="btn-outline work-link">Read case study →</a>
+</div>
+""", unsafe_allow_html=True)
 
 # ── Dashboard ──────────────────────────────────────────────────────────────────
 st.markdown('<div id="dashboard"></div>', unsafe_allow_html=True)
