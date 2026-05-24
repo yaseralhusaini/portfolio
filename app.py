@@ -27,6 +27,7 @@ resume_b64 = get_file_b64("resume.pdf")
 photo_b64  = get_file_b64("photo_nobg.png")
 report_b64 = get_file_b64("takafu_report.pdf")
 brief_b64  = get_file_b64("early_retirement_brief.pdf")
+aspire_b64 = get_file_b64("aspire_report.pdf")
 
 # ── Page routing via session state (avoids Streamlit Cloud routing issues) ──
 if 'page' not in st.session_state:
@@ -34,7 +35,7 @@ if 'page' not in st.session_state:
 
 # Allow HTML links like <a href="?page=takafu"> to trigger navigation
 _qp = st.query_params
-if _qp.get("page") in ("takafu", "georgetown"):
+if _qp.get("page") in ("takafu", "georgetown", "aspire"):
     st.session_state.page = _qp.get("page")
     st.query_params.clear()
     st.rerun()
@@ -590,7 +591,7 @@ div[data-testid="stHorizontalBlock"] {
 /* ── Selected Work ── */
 .work-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1px;
     background: rgba(26,26,26,0.08);
     border: 1px solid rgba(26,26,26,0.08);
@@ -665,6 +666,40 @@ a#georgetown-work-card:hover::after {
     transform: translateX(4px);
 }
 a#georgetown-work-card:hover .work-pill {
+    background: #9c6f3a;
+    color: #f7f5f0 !important;
+}
+a#aspire-work-card {
+    text-decoration: none !important;
+    color: inherit !important;
+    cursor: pointer;
+    position: relative;
+    border-top: 3px solid transparent;
+    transition: background 0.2s, border-top-color 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+a#aspire-work-card:hover {
+    background: #efece5;
+    border-top-color: #9c6f3a;
+    box-shadow: 0 4px 20px rgba(156,111,58,0.10);
+}
+a#aspire-work-card::after {
+    content: '→';
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.8rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 1.1rem;
+    color: rgba(156,111,58,0.45);
+    transition: color 0.2s, transform 0.2s;
+}
+a#aspire-work-card:hover::after {
+    color: #9c6f3a;
+    transform: translateX(4px);
+}
+a#aspire-work-card:hover .work-pill {
     background: #9c6f3a;
     color: #f7f5f0 !important;
 }
@@ -1133,6 +1168,117 @@ if st.session_state.page == 'georgetown':
 </footer>""", unsafe_allow_html=True)
     st.stop()
 
+# ── Aspire case study ──────────────────────────────────────────────────────────
+if st.session_state.page == 'aspire':
+    components.html("""<script>
+        function scrollUp() {
+            var targets = [
+                window.parent.document.querySelector('[data-testid="stAppViewContainer"]'),
+                window.parent.document.querySelector('[data-testid="stMain"]'),
+                window.parent.document.querySelector('.main'),
+                window.parent.document.documentElement,
+                window.parent.document.body
+            ];
+            targets.forEach(function(el) { if (el) { el.scrollTop = 0; } });
+            window.parent.scrollTo(0, 0);
+        }
+        scrollUp();
+        setTimeout(scrollUp, 150);
+        setTimeout(scrollUp, 500);
+    </script>""", height=1)
+    aspire_href = f'data:application/pdf;base64,{aspire_b64}' if aspire_b64 else '#'
+    st.markdown("""
+<nav class="nav-bar">
+  <div class="nav-name">Yaser Alhusaini</div>
+  <div class="nav-links"><span style="font-family:'DM Mono',monospace;font-size:0.82rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(28,28,28,0.45);">Case Study — Aspire</span></div>
+</nav>""", unsafe_allow_html=True)
+
+    if st.button("← Back to Portfolio", key="asp_back_top"):
+        st.session_state.page = 'home'
+        st.rerun()
+
+    st.markdown("""
+<div class="cs-header">
+  <div class="cs-overline">Case Study · 03</div>
+  <h1 class="cs-title">Aspire! Afterschool<br>Program Evaluation</h1>
+  <div class="cs-line"></div>
+  <div class="cs-meta-row">
+    <div class="cs-meta-item"><span class="cs-meta-label">Client</span><span class="cs-meta-value">Aspire! Afterschool Learning</span></div>
+    <div class="cs-meta-item"><span class="cs-meta-label">Partners</span><span class="cs-meta-value">Georgetown University · McCourt School of Public Policy</span></div>
+    <div class="cs-meta-item"><span class="cs-meta-label">Geography</span><span class="cs-meta-value">Arlington, VA</span></div>
+    <div class="cs-meta-item"><span class="cs-meta-label">Year</span><span class="cs-meta-value">2019 – 2020</span></div>
+    <div class="cs-meta-item"><span class="cs-meta-label">Domain</span><span class="cs-meta-value">Program Evaluation · Education Equity · SEL</span></div>
+  </div>
+</div>
+
+<div class="cs-body">
+  <div class="cs-section">
+    <div class="cs-section-label"><span>01</span>Context</div>
+    <div class="cs-content">
+      <h3>Closing the achievement gap in one of America's wealthiest counties</h3>
+      <p>Arlington County, Virginia ranks among the most affluent counties in the United States — yet an entrenched achievement gap divides economically disadvantaged students, predominantly Hispanic and non-English speaking, from their more affluent peers. Aspire! Afterschool Learning has worked for 25 years to narrow that gap, delivering 15 hours of weekly academic and socio-emotional support to 100 low-income 3rd–5th grade students through its Learning ROCKS! program in the Columbia Pike corridor. Over five years, program participants achieved over 90% improvement in reading instructional levels.</p>
+      <p>Georgetown University's McCourt School of Public Policy engaged our research team to evaluate the program's impact and provide a concrete roadmap for building stronger evaluation capabilities. The engagement combined quantitative program evaluation, descriptive statistical analysis of three years of student data, a comprehensive evidence-based SEL literature review, and four tracks of actionable recommendations.</p>
+      <p>This report was submitted as a Georgetown McCourt capstone project and was awarded best capstone graduation project in the cohort.</p>
+    </div>
+  </div>
+  <div class="cs-section">
+    <div class="cs-section-label"><span>02</span>My Role</div>
+    <div class="cs-content">
+      <h3>Evaluation design, data analysis, and SEL framework review</h3>
+      <ul class="cs-bullets">
+        <li><strong>Evaluation methodology design</strong> — Led the design of a propensity score matching (PSM) framework to create a comparison group of similar non-Aspire students for causal impact estimation. When individual-level data from Arlington Public Schools was unavailable, pivoted to rigorous descriptive analysis — documenting the methodology gap and providing a clear roadmap for conducting PSM once data access is secured.</li>
+        <li><strong>Data construction and analysis</strong> — Built new analytical variables (startread, endread, readchange, hwchange) to standardize reading level and homework tracking across a sample of 82 students from 2016–2019, enabling consistent across-year comparisons of new vs. returning students.</li>
+        <li><strong>SEL framework evaluation</strong> — Conducted a comprehensive review of evidence-based socio-emotional learning (SEL) frameworks, assessing each for effectiveness, implementation fit, and relevance to Aspire's low-income, predominantly Hispanic student population. Synthesized the evidence base into ranked recommendations for adoption.</li>
+        <li><strong>Consulting report delivery</strong> — Synthesized all findings into a 50+ page consulting report with four actionable recommendation tracks: impact evaluation design, implementation evaluation, SEL framework adoption, and longitudinal study architecture — providing Aspire with a structured path toward rigorous, data-driven self-assessment.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cs-section">
+    <div class="cs-section-label"><span>03</span>Key Findings</div>
+    <div class="cs-content">
+      <h3>Consistent reading gains across new and returning students</h3>
+      <div class="findings-grid">
+        <div class="finding-card"><div class="finding-num">0.82</div><div class="finding-desc">Average reading category improvement per student during one year in the Aspire program — nearly a full reading level in a single academic year.</div></div>
+        <div class="finding-card"><div class="finding-num">70%</div><div class="finding-desc">Of first-year Aspire students made substantial reading progress — improving by one or two full reading categories over the course of the year.</div></div>
+        <div class="finding-card"><div class="finding-num">68%</div><div class="finding-desc">Of third-year students continued showing improvement, challenging the "plateau theory" of diminishing returns from extended program participation.</div></div>
+        <div class="finding-card"><div class="finding-num">85%</div><div class="finding-desc">Of students maintained or improved their homework scores despite assignments growing more challenging across quarters — a meaningful measure of sustained engagement.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cs-section">
+    <div class="cs-section-label"><span>04</span>Recommendations</div>
+    <div class="cs-content">
+      <h3>A four-track roadmap for rigorous future evaluation</h3>
+      <ul class="cs-bullets">
+        <li><strong>Impact evaluation design</strong> — Delivered a propensity score matching blueprint with a detailed list of variables Aspire should begin collecting (gender, race/ethnicity, standardized reading scores, school FRPL rate) to enable future causal analysis comparing Aspire students to similar non-participants.</li>
+        <li><strong>SEL framework adoption</strong> — Recommended a suite of evidence-based SEL frameworks ranked by fit with Aspire's student population, delivery model, and resource constraints — with integration pathways and measurement indices for tracking socio-emotional outcomes alongside academic ones.</li>
+        <li><strong>Implementation evaluation</strong> — Outlined a process evaluation framework to assess how consistently the program is delivered across Aspire's four sites, identifying implementation variables that may explain variation in student outcomes.</li>
+        <li><strong>Longitudinal study design</strong> — Designed a multi-year data architecture for tracking student outcomes across grade transitions, with guidance on sample size, attrition management, and outcome variables needed for statistically sound long-term impact assessment.</li>
+      </ul>
+      <div class="cs-callout" style="margin-top:1.5rem;">
+        <p>This evaluation represents the kind of rigorous, honest program evaluation I bring to nonprofit and government clients: methodologically transparent about what the data can and cannot support, practically focused on what the client can act on now, and forward-looking in building the infrastructure for stronger evidence over time.</p>
+      </div>
+    </div>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+    st.markdown(f"""
+<div class="cs-btn-row">
+  <a href="{aspire_href}" download="Aspire_Consulting_Report.pdf" class="btn-gold">Download Full Report (PDF)</a>
+</div>""", unsafe_allow_html=True)
+
+    if st.button("← Back to Portfolio", key="asp_back_bottom"):
+        st.session_state.page = 'home'
+        st.rerun()
+
+    st.markdown("""
+<footer class="site-footer">
+  <span class="footer-text">© 2025 Yaser Alhusaini — Policy · Data · Research</span>
+  <span class="footer-text">Case Study · Aspire! Afterschool Program Evaluation · Arlington, VA</span>
+</footer>""", unsafe_allow_html=True)
+    st.stop()
+
 # ── Resume b64 ─────────────────────────────────────────────────────────────────
 resume_href = f'data:application/pdf;base64,{resume_b64}' if resume_b64 else '#'
 
@@ -1347,6 +1493,7 @@ st.markdown("""
     <div>
       <div class="exp-date">Aug 2019 — May 2020</div>
       <div class="exp-org">Aspire After-school Learning</div>
+      <a href="?page=aspire" target="_self" class="btn-exp-cs">Read case study →</a>
     </div>
     <div>
       <div class="exp-title">Pro-Bono Consultant</div>
@@ -1489,6 +1636,16 @@ st.markdown("""
       <div class="work-finding">
         <span class="work-finding-label">Key finding</span>
         <span class="work-finding-text">A 50% increase in the implicit tax rate raises early retirement probability by 20%. Research recommendations adopted as national pension policy across Saudi Arabia five years after publication.</span>
+      </div>
+      <div><span class="work-pill">Read case study →</span></div>
+    </a>
+    <a href="?page=aspire" target="_self" class="work-card" id="aspire-work-card">
+      <div class="work-overline">03 · Education Equity</div>
+      <div class="work-title">Aspire! Afterschool Program Evaluation</div>
+      <div class="work-meta">Program Evaluation &nbsp;·&nbsp; Arlington, VA &nbsp;·&nbsp; 2019–2020</div>
+      <div class="work-finding">
+        <span class="work-finding-label">Key finding</span>
+        <span class="work-finding-text">70% of first-year students improved by 1–2 reading categories in a single year. Delivered SEL framework evaluation and four-track impact roadmap — awarded Georgetown McCourt best capstone project.</span>
       </div>
       <div><span class="work-pill">Read case study →</span></div>
     </a>
